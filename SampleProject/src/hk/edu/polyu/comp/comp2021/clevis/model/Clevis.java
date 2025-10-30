@@ -48,34 +48,6 @@ public class Clevis {
         public void validateShapeExists(String name);  // 檢查形狀是否存在
     }
 
-    public class ShapeManager {
-        // 創建形狀
-        public void createRectangle(String name, double x, double y, double w, double h);
-        public void createCircle(String name, double x, double y, double r);
-        public void createLine(String name, double x1, double y1, double x2, double y2);
-        public void createSquare(String name, double x, double y, double l);
-        
-        // 群組操作
-        public void groupShapes(String groupName, List<String> shapeNames);
-        public void ungroupShapes(String groupName);
-        
-        // 刪除操作
-        public void deleteShape(String name);
-        
-        // 形狀查詢
-        public Shape getShape(String name);
-        public boolean shapeExists(String name);
-        public Shape getShapeAt(double x, double y);  // 獲取最上面的形狀
-        
-        // 其他操作
-        public void moveShape(String name, double dx, double dy);
-        public double[] getBoundingBox(String name);
-        
-        // 驗證
-        public void validateShapeName(String name);  // 檢查名稱是否已存在
-        public void validateShapeExists(String name);  // 檢查形狀是否存在
-    }
-
     public class CommandLineInterface {
     // 啟動/關閉
     public void start();  // 啟動命令行介面
