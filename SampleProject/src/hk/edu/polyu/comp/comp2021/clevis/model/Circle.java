@@ -2,47 +2,30 @@ package hk.edu.polyu.comp.comp2021.clevis.model;
 
 public class Circle extends Shape {
     
-    private double radius;
-    
-    // REQ4: 構造函數
-    public Circle(String name, double x, double y, double radius) {
-        this.name = name;
-        this.x = x;
+    private double x, y, r;
+
+    public Circle(String name, double x, double y, double radius){
+        super(name); 
+        this.x = x; 
         this.y = y;
-        this.radius = radius;
+        this.r = radius;
     }
     
-    @Override
-    public double[] getBoundingBox() {
-        // TODO: 返回邊界框
-        return null;
+    public void move(double dx, double dy){ 
+        x += dx; 
+        y += dy; 
     }
-    
-    @Override
-    public void move(double dx, double dy) {
-        // TODO: 實現移動
+
+    public double[] getBoundingBox(){
+        return new double[]{x - r, y - r, 2*r, 2*r};
     }
-    
-    @Override
-    public boolean containsPoint(double px, double py) {
-        // TODO: 實現點包含檢測
-        return false;
+
+    public boolean coverPoint(double px, double py){
+        double dist = Math.sqrt(Math.pow(px - x, 2) + Math.pow(py - y, 2));
+        return Math.abs(dist - r) < 0.05;
     }
-    
-    @Override
-    public double distanceToPoint(double px, double py) {
-        // TODO: 計算點到圓輪廓的最小距離
-        return 0.0;
-    }
-    
-    @Override
-    public String getInfo() {
-        // TODO: 返回圓的基本信息
-        return null;
-    }
-    
-    // Getter
-    public double getRadius() {
-        return radius;
+
+    public String describe(){
+        return String.format("Circle %s: center=(%.2f,%.2f), r=%.2f", name, x, y, r);
     }
 }

@@ -130,6 +130,7 @@ public class Clevis {
     // REQ9: 計算邊界框
     public void boundingbox(String name) {
         // TODO: 實現並輸出 "x y w h"
+        
     }
     
     // REQ10: 移動形狀
