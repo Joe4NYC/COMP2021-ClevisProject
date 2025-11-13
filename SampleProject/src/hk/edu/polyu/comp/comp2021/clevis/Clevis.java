@@ -1,7 +1,6 @@
 package hk.edu.polyu.comp.comp2021.clevis;
 
 import hk.edu.polyu.comp.comp2021.clevis.model.*;
-import java.util.*;
 
 public class Clevis {
 
@@ -75,9 +74,7 @@ public class Clevis {
     
     public void group(String groupName, String... shapeNames) {
         try {
-            List<String> nameList = Arrays.asList(shapeNames);
-            shapeManager.group(groupName, nameList);
-
+            shapeManager.group(groupName, shapeNames);
             if (logger != null) {
                 operationCounter ++;
                 StringBuilder cmd = new StringBuilder("gourp " + groupName);
@@ -93,8 +90,9 @@ public class Clevis {
     
     public void ungroup(String groupName) {
         try {
-            shapeManager.ungroupShapes(groupName);
+            shapeManager.ungroup(groupName);
             if (logger != null) {
+                operationCounter++;
                 logger.logCommand(operationCounter, "ungroup " + groupName);
             }
         } catch (IllegalArgumentException e) {
@@ -103,8 +101,20 @@ public class Clevis {
     }
     
     public void delete(String name) {
+<<<<<<< HEAD
         shapeManager.delete(name);
         log("delete" + name);
+=======
+        try {
+            shapeManager.delete(name);
+            if (logger != null) {
+                operationCounter++;
+                logger.logCommand(operationCounter, "delete " + name);
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+>>>>>>> 000557647d468be6f36d3727045ba46b2853a093
     }
     
     public void boundingbox(String name) {

@@ -21,6 +21,11 @@ public class Logger {
     // REQ1: 記錄操作
     public void logCommand(int operationIndex, String command) {
         // TODO: 同時寫入HTML和TXT文件
+        return;
+        return;
+        return;
+        return;
+        return;
     }
     
     // REQ1: 關閉日誌
