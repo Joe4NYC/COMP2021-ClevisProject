@@ -26,7 +26,6 @@ public class ShapeManager{
         shapes.remove(name);
     }
 
-    // 解除群組（REQ7）
     public void ungroup(String groupName) {
         Shape g = shapes.remove(groupName);
         if (g instanceof Group) {
@@ -37,7 +36,15 @@ public class ShapeManager{
         }
     }
 
-    // 判斷相交（REQ12）
+    public Shape shapeAt(double x, double y) {
+        List<Shape> list = new ArrayList<>(shapes.values());
+        Collections.reverse(list); // 從最新的開始 → Z-order
+        for (Shape s : list) {
+            if (s.coverPoint(x, y)) return s;
+        }
+        return null;
+    }
+
     public boolean intersect(String n1, String n2) {
         Shape s1 = shapes.get(n1);
         Shape s2 = shapes.get(n2);
@@ -50,17 +57,6 @@ public class ShapeManager{
                 b2[1] < b1[1] + b1[3]);
     }
 
-    // 找出覆蓋某點的最上層形狀（REQ11）
-    public Shape shapeAt(double x, double y) {
-        List<Shape> list = new ArrayList<>(shapes.values());
-        Collections.reverse(list); // 從最新的開始 → Z-order
-        for (Shape s : list) {
-            if (s.coverPoint(x, y)) return s;
-        }
-        return null;
-    }
-
-    // 列出所有形狀（REQ14）
     public void listAll() {
         for (Shape s : shapes.values()) {
             if (s instanceof Group) {
@@ -75,13 +71,11 @@ public class ShapeManager{
         }
     }
 
-    // 列出單一形狀資訊（REQ13）
     public String describeShape(String name) {
         Shape s = shapes.get(name);
         return (s != null) ? s.describe() : "Shape not found";
     }
 
-    // 取得所有形狀（給 Clevis 用）
     public Map<String, Shape> getAllShapes() {
         return shapes;
     }

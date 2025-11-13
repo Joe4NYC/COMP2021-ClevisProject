@@ -103,19 +103,29 @@ public class Clevis {
     }
     
     public void delete(String name) {
-        
+        shapeManager.delete(name);
+        log("delete" + name);
     }
     
     public void boundingbox(String name) {
-        
+        Shape s = shapeManager.get(name);
+        if(s != null){
+            double[] b = s.getBoundingBox();
+            System.out.printf("%.2f %.2f %.2f %.2f%n", b[0], b[1], b[2], b[3]);
+        }
+        log("boundingbox" + name);
     }
     
     public void move(String name, double dx, double dy) {
-
+        Shape s = shapeManager.get(name);
+        if(s != null){
+            s.move(dx, dy);
+        }
+        log("move " + name + " " + dx + " " + dy);
     }
     
     public void shapeAt(double x, double y) {
-
+        Shape s = shapeManager.shapeAt(x, y);
     }
     
     public void intersect(String n1, String n2) {
