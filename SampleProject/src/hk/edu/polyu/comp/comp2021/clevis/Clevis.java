@@ -11,7 +11,7 @@ public class Clevis {
     private Logger logger;
 
     public Clevis(){
-        // TODO: 初始化組件
+        
     }
     
     public Clevis(String htmlLogPath, String txtLogPath) {
@@ -21,6 +21,7 @@ public class Clevis {
     // REQ2: 創建矩形
     public void rectangle(String name, double x, double y, double w, double h) {
         // TODO: 實現
+        
     }
     
     // REQ3: 創建線段
@@ -56,6 +57,7 @@ public class Clevis {
     // REQ9: 計算邊界框
     public void boundingbox(String name) {
         // TODO: 實現並輸出 "x y w h"
+        
     }
     
     // REQ10: 移動形狀
