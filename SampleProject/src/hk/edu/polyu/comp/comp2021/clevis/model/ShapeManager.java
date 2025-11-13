@@ -8,7 +8,7 @@ public class ShapeManager{
     public void add(Shape s) {
         shapes.put(s.name, s);
     }
-
+ 
     public Shape get(String name) {
         return shapes.get(name);
     }

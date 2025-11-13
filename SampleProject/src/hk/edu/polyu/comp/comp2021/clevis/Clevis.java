@@ -1,21 +1,16 @@
 package hk.edu.polyu.comp.comp2021.clevis;
 
-import hk.edu.polyu.comp.comp2021.clevis.model.ShapeManager;
-import hk.edu.polyu.comp.comp2021.clevis.util.Logger;
-import hk.edu.polyu.comp.comp2021.clevis.view.CommandLineInterface;
-import java.util.Arrays;
-import java.util.List;
+import hk.edu.polyu.comp.comp2021.clevis.model.*;
+import java.util.*;
 
 public class Clevis {
 
     private ShapeManager shapeManager;
-    private CommandLineInterface cli;
     private Logger logger;
     private int operationCounter;
 
     public Clevis(){
         this.shapeManager = new ShapeManager();
-        this.cli = new CommandLineInterface(this);
         this.logger = null;
         this.operationCounter = 0;
     }
@@ -23,7 +18,6 @@ public class Clevis {
     public Clevis(String htmlLogPath, String txtLogPath) {
         // TODO: 使用日誌路徑初始化 (REQ1)
         this.shapeManager = new ShapeManager();
-        this.cli = new CommandLineInterface(this);
         this.logger = new Logger(htmlLogPath, txtLogPath);
         this.operationCounter = 0;
     }
@@ -32,13 +26,13 @@ public class Clevis {
     public void rectangle(String name, double x, double y, double w, double h) {
         // TODO: 實現
         try {
-            shapeManager.createRectangle(name, x, y, w, h);
+            Rectangle r = new Rectangle(name, x, y, h, h);
             if (logger != null) {
                 operationCounter ++;
                 logger.logCommand(operationCounter, "rectangle " + name + " " + x + " " + y + " " + w + " " + h);
             }
         } catch (IllegalArgumentException e) {
-            cli.printError(e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
         
     }
@@ -54,7 +48,7 @@ public class Clevis {
             }
             
         } catch (IllegalArgumentException e) {
-            cli.printError(e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
     
@@ -69,7 +63,7 @@ public class Clevis {
             }
             
         } catch (IllegalArgumentException e) {
-            cli.printError(e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
     
@@ -84,7 +78,7 @@ public class Clevis {
             }
             
         } catch (IllegalArgumentException e) {
-            cli.printError(e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
     
@@ -104,7 +98,7 @@ public class Clevis {
                 logger.logCommand(operationCounter, cmd.toString());
             }
         } catch (IllegalArgumentException e) {
-            cli.printError(e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
     
@@ -117,7 +111,7 @@ public class Clevis {
                 logger.logCommand(operationCounter, "ungroup " + groupName);
             }
         } catch (IllegalArgumentException e) {
-            cli.printError(e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
     
@@ -176,10 +170,6 @@ public class Clevis {
     // 獲取組件
     public ShapeManager getShapeManager() {
         return shapeManager;
-    }
-    
-    public CommandLineInterface getCLI() {
-        return cli;
     }
     
     public Logger getLogger() {
