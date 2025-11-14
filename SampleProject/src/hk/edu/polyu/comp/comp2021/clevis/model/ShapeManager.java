@@ -22,7 +22,7 @@ public class ShapeManager{
         shapes.put(groupName, new Group(groupName, children));
     }
 
-    public static void delete(String name) {
+    public void delete(String name) {
         shapes.remove(name);
     }
 
