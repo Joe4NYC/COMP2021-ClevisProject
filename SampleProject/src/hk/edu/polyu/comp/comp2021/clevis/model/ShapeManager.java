@@ -22,7 +22,7 @@ public class ShapeManager{
         shapes.put(groupName, new Group(groupName, children));
     }
 
-    public void delete(String name) {
+    public static void delete(String name) {
         shapes.remove(name);
     }
 
@@ -38,7 +38,7 @@ public class ShapeManager{
 
     public Shape shapeAt(double x, double y) {
         List<Shape> list = new ArrayList<>(shapes.values());
-        Collections.reverse(list); // 從最新的開始 → Z-order
+        Collections.reverse(list);
         for (Shape s : list) {
             if (s.coverPoint(x, y)) return s;
         }

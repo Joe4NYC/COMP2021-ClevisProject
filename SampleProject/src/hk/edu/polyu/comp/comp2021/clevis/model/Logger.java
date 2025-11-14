@@ -6,9 +6,9 @@ import java.io.PrintWriter;
 
 public class Logger {
     
-    private int count = 0;
-    private PrintWriter txt;
-    private PrintWriter html;
+    private static int count = 0;
+    private static PrintWriter txt;
+    private static PrintWriter html;
     
     public Logger(String htmlPath, String txtPath) throws IOException {
         txt = new PrintWriter(new FileWriter(txtPath, false));
@@ -22,7 +22,7 @@ public class Logger {
         html.flush();
     }
 
-    public void log(String command) {
+    public static void log(String command) {
         count++;
         txt.println(command);
         html.println("<tr><td>" + count + "</td><td>" + command.replace("<", "&lt;").replace(">", "&gt;") + "</td></tr>");

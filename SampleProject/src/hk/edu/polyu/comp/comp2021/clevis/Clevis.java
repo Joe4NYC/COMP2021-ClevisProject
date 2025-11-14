@@ -1,5 +1,7 @@
 package hk.edu.polyu.comp.comp2021.clevis;
 
+import java.io.IOException;
+
 import hk.edu.polyu.comp.comp2021.clevis.model.*;
 
 public class Clevis {
@@ -14,7 +16,7 @@ public class Clevis {
         this.operationCounter = 0;
     }
     
-    public Clevis(String htmlLogPath, String txtLogPath) {
+    public Clevis(String htmlLogPath, String txtLogPath) throws IOException {
         this.shapeManager = new ShapeManager();
         this.logger = new Logger(htmlLogPath, txtLogPath);
         this.operationCounter = 0;
@@ -25,7 +27,7 @@ public class Clevis {
             Rectangle rect = new Rectangle(name, x, y, h, h);
             if (logger != null) {
                 operationCounter ++;
-                logger.logCommand(operationCounter, "rectangle " + name + " " + x + " " + y + " " + w + " " + h);
+                logger.log(operationCounter + " rectangle " + name + " " + x + " " + y + " " + w + " " + h);
             }
         } catch (IllegalArgumentException e) {
             System.err.println("Error: " + e.getMessage());
@@ -38,7 +40,7 @@ public class Clevis {
             Line line = new Line(name, x1, y1, x2, y2);
             if (logger != null) {
                 operationCounter ++;
-                logger.logCommand(operationCounter, "line " + name + " " + x1 + " " + y1 + " " + x2 + " " + y2);
+                logger.log(operationCounter + " line " + name + " " + x1 + " " + y1 + " " + x2 + " " + y2);
             }
             
         } catch (IllegalArgumentException e) {
@@ -51,7 +53,7 @@ public class Clevis {
             Circle circle = new Circle(name, x, y, r);
             if (logger != null) {
                 operationCounter ++;
-                logger.logCommand(operationCounter,"circle " + name + " " + x + " " + y + " " + r);
+                logger.log(operationCounter + " circle " + name + " " + x + " " + y + " " + r);
             }
             
         } catch (IllegalArgumentException e) {
@@ -64,7 +66,7 @@ public class Clevis {
             Square square = new Square(name, x, y, l);
             if (logger != null) {
                 operationCounter ++;
-                logger.logCommand(operationCounter,"square " + name + " " + x + " " + y + " " + l);
+                logger.log(operationCounter + " square " + name + " " + x + " " + y + " " + l);
             }
             
         } catch (IllegalArgumentException e) {
@@ -77,11 +79,11 @@ public class Clevis {
             shapeManager.group(groupName, shapeNames);
             if (logger != null) {
                 operationCounter ++;
-                StringBuilder cmd = new StringBuilder("gourp " + groupName);
+                StringBuilder cmd = new StringBuilder("group " + groupName);
                 for (String shapeName : shapeNames) {
                     cmd.append(" ").append(shapeName);
                 }
-                logger.logCommand(operationCounter, cmd.toString());
+                logger.log(operationCounter + " " + cmd.toString());
             }
         } catch (IllegalArgumentException e) {
             System.err.println("Error: " + e.getMessage());
@@ -93,29 +95,24 @@ public class Clevis {
             shapeManager.ungroup(groupName);
             if (logger != null) {
                 operationCounter++;
-                logger.logCommand(operationCounter, "ungroup " + groupName);
+                logger.log(operationCounter + " ungroup " + groupName);
             }
         } catch (IllegalArgumentException e) {
             System.err.println("Error: " + e.getMessage());
         }
     }
     
-    public void delete(String name) {
-<<<<<<< HEAD
+public void delete(String name) {
+    try {
         shapeManager.delete(name);
-        log("delete" + name);
-=======
-        try {
-            shapeManager.delete(name);
-            if (logger != null) {
-                operationCounter++;
-                logger.logCommand(operationCounter, "delete " + name);
-            }
-        } catch (IllegalArgumentException e) {
-            System.err.println("Error: " + e.getMessage());
+        if (logger != null) {
+            operationCounter++;
+            logger.log(operationCounter + " delete " + name);
         }
->>>>>>> 000557647d468be6f36d3727045ba46b2853a093
+    } catch (IllegalArgumentException e) {
+        System.err.println("Error: " + e.getMessage());
     }
+}
     
     public void boundingbox(String name) {
         Shape s = shapeManager.get(name);
@@ -123,7 +120,7 @@ public class Clevis {
             double[] b = s.getBoundingBox();
             System.out.printf("%.2f %.2f %.2f %.2f%n", b[0], b[1], b[2], b[3]);
         }
-        log("boundingbox" + name);
+        logger.log(operationCounter + " boundingbox " + name);
     }
     
     public void move(String name, double dx, double dy) {
@@ -131,7 +128,7 @@ public class Clevis {
         if(s != null){
             s.move(dx, dy);
         }
-        log("move " + name + " " + dx + " " + dy);
+        logger.log(operationCounter + " move " + name + " " + dx + " " + dy);
     }
     
     public void shapeAt(double x, double y) {
