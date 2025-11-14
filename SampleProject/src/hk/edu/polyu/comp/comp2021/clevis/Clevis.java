@@ -130,7 +130,10 @@ public void delete(String name) {
     }
     
     public void list(String name) {
-
+        try {
+            String info = shapeManager.get
+        } catch (IllegalArgumentException e) {
+        }
     }
     
     public void listAll() {
