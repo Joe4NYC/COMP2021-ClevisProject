@@ -1,55 +1,38 @@
 package hk.edu.polyu.comp.comp2021.clevis;
 
-import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Logger {
     
-    private String htmlPath;
-    private String txtPath;
-    private BufferedWriter htmlWriter;
-    private BufferedWriter txtWriter;
-    private int operationCounter;
+    private int count = 0;
+    private PrintWriter txt;
+    private PrintWriter html;
     
-    // REQ1: 初始化日誌文件
-    public Logger(String htmlPath, String txtPath) {
-        this.htmlPath = htmlPath;
-        this.txtPath = txtPath;
-        this.operationCounter = 0;
-        // TODO: 初始化寫入器
+    public Logger(String htmlPath, String txtPath) throws IOException {
+        txt = new PrintWriter(new FileWriter(txtPath, false));
+        html = new PrintWriter(new FileWriter(htmlPath, false));
+        html.println("<!DOCTYPE html>");
+        html.println("<html><head><meta charset=\"UTF-8\">");
+        html.println("<title>Clevis Log</title></head><body>");
+        html.println("<h2>Clevis Operation Log</h2>");
+        html.println("<table border=\"1\">");
+        html.println("<tr><th>No.</th><th>Command</th></tr>");
+        html.flush();
+    }
+
+    public void log(String command) {
+        count++;
+        txt.println(command);
+        html.println("<tr><td>" + count + "</td><td>" + command.replace("<", "&lt;").replace(">", "&gt;") + "</td></tr>");
+        txt.flush();
+        html.flush();
     }
     
-    // REQ1: 記錄操作
-    public void logCommand(int operationIndex, String command) {
-        // TODO: 同時寫入HTML和TXT文件
-        return;
-        return;
-        return;
-        return;
-        return;
-    }
-    
-    // REQ1: 關閉日誌
     public void close() {
-        // TODO: 關閉文件寫入器
-    }
-    
-    // 內部方法 - 寫入HTML表格行
-    private void writeToHtml(int index, String command) {
-        // TODO: 寫入HTML格式的表格行
-    }
-    
-    // 內部方法 - 寫入TXT文件
-    private void writeToTxt(String command) {
-        // TODO: 寫入純文本命令
-    }
-    
-    // 初始化HTML文件
-    private void initHtmlFile() {
-        // TODO: 寫入HTML表格頭部
-    }
-    
-    // 完成HTML文件
-    private void finalizeHtmlFile() {
-        // TODO: 寫入HTML表格尾部
+        html.println("</table></body></html>");
+        txt.close();
+        html.close();
     }
 }
