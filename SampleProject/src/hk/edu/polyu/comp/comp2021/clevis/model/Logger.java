@@ -22,7 +22,7 @@ public class Logger {
         html.flush();
     }
 
-    public static void log(String command) {
+    public void log(String command) {
         count++;
         txt.println(command);
         html.println("<tr><td>" + count + "</td><td>" + command.replace("<", "&lt;").replace(">", "&gt;") + "</td></tr>");
