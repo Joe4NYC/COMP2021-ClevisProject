@@ -5,35 +5,62 @@ import java.util.*;
 public class ShapeManager{
     private Map<String, Shape> shapes = new LinkedHashMap<>();
 
-    public void add(Shape s) {
-        shapes.put(s.name, s);
+    public void createRectangle(String name, double x, double y, double w, double h) {
+        checkNameAvailable(name);
+        shapes.put(name, new Rectangle(name, x, y, w, h));
     }
- 
-    public Shape get(String name) {
-        return shapes.get(name);
+
+    public void createLine(String name, double x1, double y1, double x2, double y2) {
+        checkNameAvailable(name);
+        shapes.put(name, new Line(name, x1, y1, x2, y2));
+    }
+
+    public void createCircle(String name, double x, double y, double r) {
+        checkNameAvailable(name);
+        shapes.put(name, new Circle(name, x, y, r));
+    }
+
+    public void createSquare(String name, double x, double y, double s) {
+        checkNameAvailable(name);
+        shapes.put(name, new Square(name, x, y, s));
     }
 
     public void group(String groupName, String[] members) {
-        List<Shape> children = new ArrayList<>();
-        for (String m : members) {
-            Shape s = shapes.remove(m);
-            if (s != null) children.add(s);
+        List<Shape> allShapes = new ArrayList<>();
+        for(String member : members) {
+            Shape s = shapes.remove(member);
+            if (s != null) {
+                allShapes.add(s);
+            }
         }
-        shapes.put(groupName, new Group(groupName, children));
-    }
-
-    public void delete(String name) {
-        shapes.remove(name);
+        shapes.put(groupName, new Group(groupName, allShapes));
     }
 
     public void ungroup(String groupName) {
         Shape g = shapes.remove(groupName);
         if (g instanceof Group) {
             Group group = (Group) g;
-            for (Shape child : group.getShapes()) {
-                shapes.put(child.name, child);
+            for (Shape shapeInGroup : group.getShapes()) {
+                shapes.put(shapeInGroup.name, shapeInGroup);
             }
         }
+    }
+
+    public void move(String name, double dx, double dy) {
+        Shape s = shapes.get(name);
+        s.move(dx, dy);
+    }
+
+    public void delete(String name) {
+        shapes.remove(name);
+    }
+
+    public double[] getBoundingBox(String name) {
+        Shape s = shapes.get(name);
+        double[] b = s.getBoundingBox();
+        return new double[] {
+            round(b[0]), round(b[1]), round(b[2]), round(b[3])
+        };
     }
 
     public Shape shapeAt(double x, double y) {
@@ -48,7 +75,9 @@ public class ShapeManager{
     public boolean intersect(String n1, String n2) {
         Shape s1 = shapes.get(n1);
         Shape s2 = shapes.get(n2);
-        if (s1 == null || s2 == null) return false;
+        if (s1 == null || s2 == null){
+            return false;
+        }
         double[] b1 = s1.getBoundingBox();
         double[] b2 = s2.getBoundingBox();
         return (b1[0] < b2[0] + b2[2] &&
@@ -71,12 +100,30 @@ public class ShapeManager{
         }
     }
 
-    public String describeShape(String name) {
+    public String describeString(String name) {
         Shape s = shapes.get(name);
-        return (s != null) ? s.describe() : "Shape not found";
+        if(s != null){
+            return s.describe();
+        }else{
+            return "Shape not found";
+        }
     }
 
     public Map<String, Shape> getAllShapes() {
         return shapes;
+    }
+
+    private void checkNameAvailable(String name) {
+        if (shapes.containsKey(name)) {
+            throw new IllegalArgumentException("Name already used: " + name);
+        }
+    }
+
+    private double round(double val) {
+        return Math.round(val * 100.0) / 100.0;
+    }
+
+    public Shape get(String name) {
+        return shapes.get(name);
     }
 }

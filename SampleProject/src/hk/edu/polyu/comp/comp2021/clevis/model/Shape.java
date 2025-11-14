@@ -15,4 +15,7 @@ public abstract class Shape {
 
     public abstract boolean coverPoint(double x, double y);
 
+    public String getName() {
+        return name;
+    }
 }
