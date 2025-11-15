@@ -6,17 +6,13 @@ import hk.edu.polyu.comp.comp2021.clevis.model.ShapeManager;
 import java.io.IOException;
 import java.util.Scanner;
 
-/**
- * Main entry point – COMP2021 Clevis Project
- * Run with: java hk.edu.polyu.comp.comp2021.clevis.Application -html log.html -txt log.txt
- */
+
 public class Application {
 
     public static void main(String[] args) {
         String htmlPath = null;
         String txtPath = null;
 
-        // Parse command-line arguments: -html file.html -txt file.txt
         for (int i = 0; i < args.length; i++) {
             if ("-html".equalsIgnoreCase(args[i]) && i + 1 < args.length) {
                 htmlPath = args[++i];
@@ -34,7 +30,6 @@ public class Application {
             System.exit(1);
         }
 
-        // Initialize Model components
         Logger logger = null;
         ShapeManager manager = new ShapeManager();
 
@@ -45,7 +40,6 @@ public class Application {
             System.exit(1);
         }
 
-        // Ensure HTML file is properly closed on exit (quit or Ctrl+C)
         Runtime.getRuntime().addShutdownHook(new Thread(logger::close));
 
         System.out.println("=== Clevis – Command Line Vector Graphics Software ===");
@@ -62,10 +56,9 @@ public class Application {
                     break;
                 }
 
-                // Controller: Process command and log only on success
                 boolean success = CommandProcessor.execute(input, manager);
                 if (success) {
-                    Logger.log(input);  // REQ1: Only successful commands are logged, raw text
+                    logger.log(input);
                 }
             }
         }
