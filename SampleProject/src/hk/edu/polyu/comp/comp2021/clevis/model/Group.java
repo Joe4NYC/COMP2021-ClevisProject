@@ -50,4 +50,11 @@ public class Group extends Shape {
     public List<Shape> getShapes() { 
         return allShapes; 
     }
+
+
+    public void restoreMembers(){}
+
+    public List<Shape> getMembers() {
+        return new ArrayList<>(allShapes);
+    }
 }

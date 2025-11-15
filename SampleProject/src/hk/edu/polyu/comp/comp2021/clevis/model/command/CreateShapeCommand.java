@@ -14,7 +14,7 @@ public class CreateShapeCommand implements Command {
 
     @Override
     public void execute() {
-        manager.addShape(shape);
+        manager.addShapeDirectly(shape);
     }
 
     @Override

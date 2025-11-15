@@ -128,13 +128,19 @@ public class ShapeManager{
         return shapes.get(name);
     }
 
-    public void addShape(Shape shape) {
+    private void addShape(Shape shape) {
         shapes.put(shape.getName(), shape);
         zOrderList.add(shape);
     }
 
-    void removeShape(Shape shape) {
+    public void addShapeDirectly(Shape shape) {
+        shapes.put(shape.getName(), shape);
+        zOrderList.add(shape);
+    }
+
+    public void removeShape(Shape shape) {
         shapes.remove(shape.getName());
         zOrderList.remove(shape);
     }
+
 }
