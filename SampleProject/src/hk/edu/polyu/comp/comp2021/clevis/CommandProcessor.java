@@ -2,10 +2,7 @@ package hk.edu.polyu.comp.comp2021.clevis;
 
 import hk.edu.polyu.comp.comp2021.clevis.model.ShapeManager;
 
-/**
- * Controller: Parses user input and calls appropriate ShapeManager methods
- * Returns true only if command executed successfully (for logging)
- */
+
 public class CommandProcessor {
 
     public static boolean execute(String rawCommand, ShapeManager manager) {
@@ -40,7 +37,7 @@ public class CommandProcessor {
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]),
                             Double.parseDouble(tokens[4]));
                 }
-                case "group" -> ShapeManager.group(rawCommand);           // pass full command for parsing
+                case "group" -> ShapeManager.group(rawCommand);
                 case "ungroup" -> {
                     checkArgs(tokens, 2);
                     ShapeManager.ungroup(tokens[1]);
@@ -58,7 +55,7 @@ public class CommandProcessor {
                     checkArgs(tokens, 2);
                     double[] box = ShapeManager.getBoundingBox(tokens[1]);
                     System.out.printf("%.2f %.2f %.2f %.2f%n", box[0], box[1], box[2], box[3]);
-                    return false;  // Query command → not logged
+                    return false;
                 }
                 case "intersect" -> {
                     checkArgs(tokens, 3);
@@ -86,7 +83,7 @@ public class CommandProcessor {
                     return false;
                 }
             }
-            return true;  // Success → will be logged in Application.java
+            return true; 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return false;
