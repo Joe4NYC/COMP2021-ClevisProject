@@ -4,6 +4,7 @@ import java.util.*;
 
 public class ShapeManager{
     private Map<String, Shape> shapes = new LinkedHashMap<>();
+    private final List<Shape> zOrderList = new ArrayList<>();
 
     public void createRectangle(String name, double x, double y, double w, double h) {
         checkNameAvailable(name);
@@ -125,5 +126,15 @@ public class ShapeManager{
 
     public Shape get(String name) {
         return shapes.get(name);
+    }
+
+    public void addShape(Shape shape) {
+        shapes.put(shape.getName(), shape);
+        zOrderList.add(shape);
+    }
+
+    void removeShape(Shape shape) {
+        shapes.remove(shape.getName());
+        zOrderList.remove(shape);
     }
 }
