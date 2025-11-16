@@ -174,4 +174,25 @@ public class ShapeManager{
         zOrderList.remove(shape);
     }
     
+    public void undo() {
+        if (undoStack.isEmpty()) {
+            System.out.println("Nothing to undo.");
+            return;
+        }
+
+        Command command = undoStack.pop();
+        command.undo(); 
+        redoStack.push(command);
+    }
+
+    public void redo() {
+        if (redoStack.isEmpty()) {
+            System.out.println("Nothing to redo.");
+            return;
+        }
+
+        Command command = redoStack.pop();
+        command.redo();  
+        undoStack.push(command);
+    }
 }

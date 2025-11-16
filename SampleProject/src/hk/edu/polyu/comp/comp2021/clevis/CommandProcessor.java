@@ -82,7 +82,12 @@ public class CommandProcessor {
                     System.out.println("Unknown command: " + cmd);
                     return false;
                 }
-            }
+                case "undo" -> {
+                    shapeManager.undo();
+                }
+                case "redo" -> {
+                    shapeManager.redo(); 
+                }
             return true; 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
