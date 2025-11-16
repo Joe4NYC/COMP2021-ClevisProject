@@ -7,8 +7,8 @@ public class Group extends Shape {
     
     private List<Shape> allShapes = new ArrayList<>();
     
-    public Group(String name, List<Shape> shapes) {
-        super(name);
+    public Group(String name, int zOrder, List<Shape> shapes) {
+        super(name, zOrder);
         allShapes.addAll(shapes);
     }
 
@@ -44,19 +44,19 @@ public class Group extends Shape {
     }
 
     public boolean intersect(Shape other) {
-        double[] b1 = this.getBoundingBox();
-        double[] b2 = other.getBoundingBox();
-        return (b1[0] < b2[0] + b2[2] &&
-                b2[0] < b1[0] + b1[2] &&
-                b1[1] < b2[1] + b2[3] &&
-                b2[1] < b1[1] + b1[3]);
+        for (Shape s : allShapes) {
+            if (s.intersect(other)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String describe(){
-        StringBuilder sb = new StringBuilder("Group " + name + ": ");
-        for (Shape s : allShapes){
-            sb.append(s.name).append(" ");
-        } 
+        StringBuilder sb = new StringBuilder("Group " + getName() + ": ");
+        for (Shape s : allShapes) {
+            sb.append(s.getName()).append(" ");
+        }
         return sb.toString();
     }
 
@@ -68,6 +68,9 @@ public class Group extends Shape {
 
     @Override
     public double getX() {
+        if(allShapes.isEmpty()){
+            return 0;
+        }
         double minX = Double.MAX_VALUE;
         for (Shape s : allShapes) {
             minX = Math.min(minX, s.getX());

@@ -8,8 +8,8 @@ public class Line extends Shape {
     private double y2;
 
     
-    public Line(String name, double x, double y, double x2, double y2) {
-        super(name);
+    public Line(String name, double x, double y, double x2, double y2, int zOrder) {
+        super(name, zOrder);
         this.x = x;
         this.y = y;
         this.x2 = x2;

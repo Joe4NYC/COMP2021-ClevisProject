@@ -12,32 +12,47 @@ public class ShapeManager{
     private final List<Shape> zOrderList = new ArrayList<>();
     private final Deque<Command> undoStack = new ArrayDeque<>();
     private final Deque<Command> redoStack = new ArrayDeque<>();
+    private int currentZOrder = 0;
+
+    private int nextZOrder() {
+        return ++currentZOrder;
+    }
+
+    private void addShape(Shape shape) {
+        shapes.put(shape.getName(), shape);
+        zOrderList.add(shape);
+        zOrderList.sort(Comparator.comparingInt(Shape::getZOrder));
+    }
 
     public void createRectangle(String name, double x, double y, double w, double h) {
         checkNameAvailable(name);
-        shapes.put(name, new Rectangle(name, x, y, w, h));
-        undoStack.push(new CreateShapeCommand(this, shapes.get(name)));
+        Rectangle r = new Rectangle(name, x, y, w, h, nextZOrder());
+        addShape(r);
+        undoStack.push(new CreateShapeCommand(this, r));
         redoStack.clear();
     }
 
     public void createLine(String name, double x1, double y1, double x2, double y2) {
         checkNameAvailable(name);
-        shapes.put(name, new Line(name, x1, y1, x2, y2));
-        undoStack.push(new CreateShapeCommand(this, shapes.get(name)));
+        Line line = new Line(name, x1, y1, x2, y2, nextZOrder());
+        addShape(line);
+        undoStack.push(new CreateShapeCommand(this, line));
         redoStack.clear();
     }
 
     public void createCircle(String name, double x, double y, double r) {
         checkNameAvailable(name);
-        shapes.put(name, new Circle(name, x, y, r));
-        undoStack.push(new CreateShapeCommand(this, shapes.get(name)));
+        Circle circle = new Circle(name, x, y, r, nextZOrder());
+        addShape(circle);
+        undoStack.push(new CreateShapeCommand(this, circle));
         redoStack.clear();
     }
 
     public void createSquare(String name, double x, double y, double s) {
         checkNameAvailable(name);
-        shapes.put(name, new Square(name, x, y, s));
-        undoStack.push(new CreateShapeCommand(this, shapes.get(name)));
+        Square square = new Square(name, x, y, s, nextZOrder());
+        addShape(square);
+        undoStack.push(new CreateShapeCommand(this, square));
         redoStack.clear();
     }
 
@@ -46,25 +61,22 @@ public class ShapeManager{
         if (tokens.length < 3) {
             throw new IllegalArgumentException("Group command requires at least a name and one member");
         }
-        
+
         String groupName = tokens[1];
         checkNameAvailable(groupName);
-        
-        List<Shape> allShapes = new ArrayList<>();
+
+        List<Shape> members = new ArrayList<>();
         for (int i = 2; i < tokens.length; i++) {
             Shape s = shapes.remove(tokens[i]);
-            if (s == null) {
-                throw new IllegalArgumentException("Shape not found: " + tokens[i]);
-            }
-            allShapes.add(s);
+            if (s == null) throw new IllegalArgumentException("Shape not found: " + tokens[i]);
+            members.add(s);
+            zOrderList.remove(s);
         }
 
-        if (allShapes.isEmpty()) {
-            throw new IllegalArgumentException("Cannot create empty group: " + groupName);
-        }
+        Group group = new Group(groupName, nextZOrder(), members);
+        addShape(group);
 
-        shapes.put(groupName, new Group(groupName, allShapes));
-        undoStack.push(new GroupCommand(this, shapes.get(groupName), allShapes));
+        undoStack.push(new GroupCommand(this, group, members));
         redoStack.clear();
     }
 
@@ -136,7 +148,7 @@ public class ShapeManager{
     }
 
     public Shape shapeAt(double x, double y) {
-        List<Shape> list = new ArrayList<>(shapes.values());
+        List<Shape> list = new ArrayList<>(zOrderList);
         Collections.reverse(list);
         for (Shape s : list) {
             if (s.coverPoint(x, y)) return s;
@@ -203,11 +215,6 @@ public class ShapeManager{
 
     public Shape get(String name) {
         return shapes.get(name);
-    }
-
-    private void addShape(Shape shape) {
-        shapes.put(shape.getName(), shape);
-        zOrderList.add(shape);
     }
 
     public void addShapeDirectly(Shape shape) {

@@ -4,8 +4,8 @@ public class Circle extends Shape {
     
     private double centerX, centerY, r;
 
-    public Circle(String name, double centerX, double centerY, double radius){
-        super(name); 
+    public Circle(String name, double centerX, double centerY, double radius, int zOrder){
+        super(name, zOrder); 
         this.centerX = centerX; 
         this.centerY = centerY;
         this.r = radius;
