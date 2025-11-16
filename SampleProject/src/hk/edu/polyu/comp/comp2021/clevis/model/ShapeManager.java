@@ -41,7 +41,7 @@ public class ShapeManager{
         Shape g = shapes.remove(groupName);
         if (g instanceof Group) {
             Group group = (Group) g;
-            for (Shape shapeInGroup : group.getShapes()) {
+            for (Shape shapeInGroup : group.getMembers()) {
                 shapes.put(shapeInGroup.name, shapeInGroup);
             }
         }
@@ -92,7 +92,7 @@ public class ShapeManager{
             if (s instanceof Group) {
                 Group group = (Group) s;
                 System.out.println("Group " + group.name + ":");
-                for (Shape child : group.getShapes()) {
+                for (Shape child : group.getMembers()) {
                     System.out.println("  " + child.name);
                 }
             } else {

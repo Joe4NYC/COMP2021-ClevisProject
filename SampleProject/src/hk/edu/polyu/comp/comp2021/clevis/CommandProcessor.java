@@ -15,66 +15,66 @@ public class CommandProcessor {
             switch (cmd) {
                 case "rectangle" -> {
                     checkArgs(tokens, 7);
-                    ShapeManager.createRectangle(tokens[1],
+                    manager.createRectangle(tokens[1],
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]),
                             Double.parseDouble(tokens[4]), Double.parseDouble(tokens[5]));
                 }
                 case "line" -> {
                     checkArgs(tokens, 7);
-                    ShapeManager.createLine(tokens[1],
+                    manager.createLine(tokens[1],
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]),
                             Double.parseDouble(tokens[4]), Double.parseDouble(tokens[5]));
                 }
                 case "circle" -> {
                     checkArgs(tokens, 6);
-                    ShapeManager.createCircle(tokens[1],
+                    manager.createCircle(tokens[1],
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]),
                             Double.parseDouble(tokens[4]));
                 }
                 case "square" -> {
                     checkArgs(tokens, 6);
-                    ShapeManager.createSquare(tokens[1],
+                    manager.createSquare(tokens[1],
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]),
                             Double.parseDouble(tokens[4]));
                 }
-                case "group" -> ShapeManager.group(rawCommand);
+                case "group" -> manager.group(rawCommand);
                 case "ungroup" -> {
                     checkArgs(tokens, 2);
-                    ShapeManager.ungroup(tokens[1]);
+                    manager.ungroup(tokens[1]);
                 }
                 case "delete" -> {
                     checkArgs(tokens, 2);
-                    ShapeManager.delete(tokens[1]);
+                    manager.delete(tokens[1]);
                 }
                 case "move" -> {
                     checkArgs(tokens, 4);
-                    ShapeManager.move(tokens[1],
+                    manager.move(tokens[1],
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]));
                 }
                 case "boundingbox" -> {
                     checkArgs(tokens, 2);
-                    double[] box = ShapeManager.getBoundingBox(tokens[1]);
+                    double[] box = manager.getBoundingBox(tokens[1]);
                     System.out.printf("%.2f %.2f %.2f %.2f%n", box[0], box[1], box[2], box[3]);
                     return false;
                 }
                 case "intersect" -> {
                     checkArgs(tokens, 3);
-                    System.out.println(ShapeManager.intersect(tokens[1], tokens[2]));
+                    System.out.println(manager.intersect(tokens[1], tokens[2]));
                     return false;
                 }
                 case "shapeat" -> {
                     checkArgs(tokens, 3);
-                    System.out.println(ShapeManager.shapeAt(
+                    System.out.println(manager.shapeAt(
                             Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
                     return false;
                 }
                 case "list" -> {
                     checkArgs(tokens, 2);
-                    System.out.println(ShapeManager.listShape(tokens[1]));
+                    System.out.println(manager.listShape(tokens[1]));
                     return false;
                 }
                 case "listall" -> {
-                    System.out.println(ShapeManager.listAll());
+                    System.out.println(manager.listAll());
                     return false;
                 }
                 case "quit" -> System.exit(0);
