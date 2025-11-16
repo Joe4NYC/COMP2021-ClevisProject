@@ -3,7 +3,10 @@ package hk.edu.polyu.comp.comp2021.clevis.model;
 import java.util.*;
 
 import hk.edu.polyu.comp.comp2021.clevis.model.command.Command;
+import hk.edu.polyu.comp.comp2021.clevis.model.command.CreateShapeCommand;
+import hk.edu.polyu.comp.comp2021.clevis.model.command.DeleteCommand;
 import hk.edu.polyu.comp.comp2021.clevis.model.command.GroupCommand;
+import hk.edu.polyu.comp.comp2021.clevis.model.command.MoveCommand;
 
 public class ShapeManager{
     private Map<String, Shape> shapes = new LinkedHashMap<>();
@@ -14,21 +17,29 @@ public class ShapeManager{
     public void createRectangle(String name, double x, double y, double w, double h) {
         checkNameAvailable(name);
         shapes.put(name, new Rectangle(name, x, y, w, h));
+        undoStack.push(new CreateShapeCommand(this, shapes.get(name)));
+        redoStack.clear();
     }
 
     public void createLine(String name, double x1, double y1, double x2, double y2) {
         checkNameAvailable(name);
         shapes.put(name, new Line(name, x1, y1, x2, y2));
+        undoStack.push(new CreateShapeCommand(this, shapes.get(name)));
+        redoStack.clear();
     }
 
     public void createCircle(String name, double x, double y, double r) {
         checkNameAvailable(name);
         shapes.put(name, new Circle(name, x, y, r));
+        undoStack.push(new CreateShapeCommand(this, shapes.get(name)));
+        redoStack.clear();
     }
 
     public void createSquare(String name, double x, double y, double s) {
         checkNameAvailable(name);
         shapes.put(name, new Square(name, x, y, s));
+        undoStack.push(new CreateShapeCommand(this, shapes.get(name)));
+        redoStack.clear();
     }
 
     public void group(String rawCommand) {
@@ -73,11 +84,33 @@ public class ShapeManager{
             s.move(dx, dy);
         }else{
             throw new IllegalArgumentException("Shape not found");
-        }
+        }        
+        
+        undoStack.push((Command) new MoveCommand(s, dx, dy));
+        redoStack.clear();
     }
 
     public void delete(String name) {
-        shapes.remove(name);
+    Shape s = shapes.get(name);
+    
+    List<Shape> deleted = new ArrayList<>();
+    collectAll(s, deleted);
+
+    for (Shape shape : deleted) {
+        removeShape(shape);
+    }
+
+    undoStack.push(new DeleteCommand(this, deleted));
+    redoStack.clear();
+    }
+
+    private void collectAll(Shape s, List<Shape> list) {
+        list.add(s);
+        if (s instanceof Group g) {
+            for (Shape m : g.getMembers()) {
+                collectAll(m, list);
+            }
+        }
     }
 
     public double[] getBoundingBox(String name) {
