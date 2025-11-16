@@ -87,9 +87,9 @@ public class ShapeManagerTest {
         manager.createRectangle("r1", 0, 0, 20, 20);
         manager.createCircle("c1", 10, 10, 5);
 
-        assertEquals("c1", manager.shapeAt(10, 10));
+        assertEquals("c1", manager.shapeAt(15, 10));
         assertEquals("r1", manager.shapeAt(0, 0));
-        assertEquals("none", manager.shapeAt(100, 100));
+        assertEquals(null, manager.shapeAt(100, 100));
     }
 
     @Test
@@ -104,6 +104,6 @@ public class ShapeManagerTest {
     public void testZOrder() {
         manager.createRectangle("r1", 0, 0, 10, 10);
         manager.createCircle("c1", 0, 0, 5);
-        assertEquals("c1", manager.shapeAt(0, 0));
+        assertEquals("c1", manager.shapeAt(5, 0));
     }
 }

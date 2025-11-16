@@ -147,11 +147,11 @@ public class ShapeManager{
             };
     }
 
-    public Shape shapeAt(double x, double y) {
+    public String shapeAt(double x, double y) {
         List<Shape> list = new ArrayList<>(zOrderList);
         Collections.reverse(list);
         for (Shape s : list) {
-            if (s.coverPoint(x, y)) return s;
+            if (s.coverPoint(x, y)) return s.getName();
         }
         return null;
     }

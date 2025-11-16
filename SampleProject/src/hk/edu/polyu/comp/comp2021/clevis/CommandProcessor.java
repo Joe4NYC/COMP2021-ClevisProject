@@ -65,8 +65,8 @@ public class CommandProcessor {
                 }
                 case "shapeat" -> {
                     checkArgs(tokens, 3);
-                    Shape found = manager.shapeAt(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]));
-                    System.out.println(found == null ? "" : found.getName());
+                    String found = manager.shapeAt(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]));
+                    System.out.println(found == null ? "" : found);
                     return false;
                 }
                 case "list" -> {
