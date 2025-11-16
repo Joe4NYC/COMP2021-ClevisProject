@@ -4,20 +4,20 @@ import hk.edu.polyu.comp.comp2021.clevis.model.Shape;
 
 public class MoveCommand {
     private final Shape shape;
-    private final double chanX;
-    private final double chanY;
+    private final double changeX;
+    private final double changeY;
 
-    public MoveCommand(Shape shape, double chanX, double chanY) {
+    public MoveCommand(Shape shape, double changeX, double changeY) {
         this.shape = shape;
-        this.chanX = chanX;
-        this.chanY = chanY;
+        this.changeX = changeX;
+        this.changeY = changeY;
     }
 
     public void redo() {
-        shape.move(chanX, chanY);
+        shape.move(changeX, changeY);
     }
 
     public void undo() {
-        shape.move(-chanX, -chanY);
+        shape.move(-changeX, -changeY);
     }
 }

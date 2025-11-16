@@ -80,14 +80,13 @@ public class ShapeManager{
 
     public void move(String name, double dx, double dy) {
         Shape s = shapes.get(name);
-        if(s != null){
-            s.move(dx, dy);
-        }else{
+        if(s == null){
             throw new IllegalArgumentException("Shape not found");
         }        
         
         undoStack.push((Command) new MoveCommand(s, dx, dy));
         redoStack.clear();
+        s.move(dx, dy);
     }
 
     public void delete(String name) {
