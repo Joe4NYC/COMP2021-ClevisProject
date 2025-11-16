@@ -15,6 +15,8 @@ public abstract class Shape {
 
     public abstract boolean coverPoint(double x, double y);
 
+    public abstract boolean intersect(Shape other);
+
     public String getName() {
         return name;
     }

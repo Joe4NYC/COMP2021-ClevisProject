@@ -49,7 +49,11 @@ public class ShapeManager{
 
     public void move(String name, double dx, double dy) {
         Shape s = shapes.get(name);
-        s.move(dx, dy);
+        if(s != null){
+            s.move(dx, dy);
+        }else{
+            throw new IllegalArgumentException("Shape not found");
+        }
     }
 
     public void delete(String name) {
@@ -58,10 +62,14 @@ public class ShapeManager{
 
     public double[] getBoundingBox(String name) {
         Shape s = shapes.get(name);
+        if(s == null){
+            throw new IllegalArgumentException("Shape not found");
+        }
+        
         double[] b = s.getBoundingBox();
-        return new double[] {
-            round(b[0]), round(b[1]), round(b[2]), round(b[3])
-        };
+            return new double[] {
+                round(b[0]), round(b[1]), round(b[2]), round(b[3])
+            };
     }
 
     public Shape shapeAt(double x, double y) {

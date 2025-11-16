@@ -19,8 +19,10 @@ public class Group extends Shape {
     }
 
     public double[] getBoundingBox(){
-        double minX = Double.MAX_VALUE, minY = -Double.MAX_VALUE;
-        double maxX = Double.MIN_VALUE, maxY = -Double.MIN_VALUE;
+        double minX = Double.MAX_VALUE, 
+        double minY = Double.MAX_VALUE;
+        double maxX = -Double.MIN_VALUE
+        double maxY = -Double.MIN_VALUE;
 
         for(Shape s : allShapes){
             double[] wholeBoundingBox = s.getBoundingBox();
@@ -43,7 +45,9 @@ public class Group extends Shape {
 
     public String describe(){
         StringBuilder sb = new StringBuilder("Group " + name + ": ");
-        for (Shape s : allShapes) sb.append(s.name).append(" ");
+        for (Shape s : allShapes){
+            sb.append(s.name).append(" ");
+        } 
         return sb.toString();
     }
 
