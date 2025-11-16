@@ -68,15 +68,6 @@ public class GraphicsPanel extends JPanel {
         Rectangle2D.Double r = new Rectangle2D.Double(x, y, width, height);
         
         g2d.draw(r);
-        
-        Color fillColor = new Color(
-            g2d.getColor().getRed(),
-            g2d.getColor().getGreen(),
-            g2d.getColor().getBlue(),
-            50
-        );
-        g2d.setColor(fillColor);
-        g2d.fill(r);
     }
 
     private void drawCircle(Graphics2D g2d, Circle circle) {
@@ -88,28 +79,15 @@ public class GraphicsPanel extends JPanel {
         Ellipse2D.Double ellipse = new Ellipse2D.Double(x, y, diameter, diameter);
         
         g2d.draw(ellipse);
-        
-        Color originalColor = g2d.getColor();
-        g2d.setColor(new Color(
-            originalColor.getRed(),
-            originalColor.getGreen(),
-            originalColor.getBlue(),
-            50
-        ));
-        g2d.fill(ellipse);
-        g2d.setColor(originalColor);
     }
 
     private void drawLine(Graphics2D g2d, Line line) {
-        double[] bbox = line.getBoundingBox();
-
         Line2D.Double l = new Line2D.Double(
             line.getX1(),
             line.getY1(),
             line.getX2(),
             line.getY2()
         );
-
         g2d.draw(l);
     }
 
