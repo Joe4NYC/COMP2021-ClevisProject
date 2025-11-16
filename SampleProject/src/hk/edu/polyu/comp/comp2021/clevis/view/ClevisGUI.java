@@ -22,7 +22,7 @@ public class ClevisGUI extends JFrame {
     private JButton resetViewButton;
     
     public ClevisGUI(String htmlPath, String txtPath) {
-        super("=== Clevis – Graphical Vector Graphics Software ===");
+        super("Clevis – Graphical Vector Graphics Software");
         this.shapeManager = new ShapeManager();
         try {
             this.logger = new Logger(htmlPath, txtPath);
