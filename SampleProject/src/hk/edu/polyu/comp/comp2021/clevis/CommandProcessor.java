@@ -14,25 +14,25 @@ public class CommandProcessor {
         try {
             switch (cmd) {
                 case "rectangle" -> {
-                    checkArgs(tokens, 7);
+                    checkArgs(tokens, 6);
                     manager.createRectangle(tokens[1],
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]),
                             Double.parseDouble(tokens[4]), Double.parseDouble(tokens[5]));
                 }
                 case "line" -> {
-                    checkArgs(tokens, 7);
+                    checkArgs(tokens, 6);
                     manager.createLine(tokens[1],
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]),
                             Double.parseDouble(tokens[4]), Double.parseDouble(tokens[5]));
                 }
                 case "circle" -> {
-                    checkArgs(tokens, 6);
+                    checkArgs(tokens, 5);
                     manager.createCircle(tokens[1],
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]),
                             Double.parseDouble(tokens[4]));
                 }
                 case "square" -> {
-                    checkArgs(tokens, 6);
+                    checkArgs(tokens, 5);
                     manager.createSquare(tokens[1],
                             Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]),
                             Double.parseDouble(tokens[4]));
@@ -70,7 +70,7 @@ public class CommandProcessor {
                 }
                 case "list" -> {
                     checkArgs(tokens, 2);
-                    System.out.println(manager.listShape(tokens[1]));
+                    System.out.println(manager.listAll());
                     return false;
                 }
                 case "listall" -> {
