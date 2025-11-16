@@ -19,7 +19,7 @@ public class DeleteCommand implements Command {
         this.deletedShape = shape;
         this.allDeletedShapes = new ArrayList<>();
         collectAllShapes(shape);
-        
+
     }
 
     private void collectAllShapes(Shape s) {
@@ -33,23 +33,20 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute() {
-
-        for (Shape s : allDeletedShapes) {
-            manager.removeShape(s);
-        }
-    }
-
-    @Override
     public void undo() {
-
         for (int i = allDeletedShapes.size() - 1; i >= 0; i--) {
             Shape s = allDeletedShapes.get(i);
             manager.addShapeDirectly(s);
         }
-
         if (deletedShape instanceof Group g) {
             g.restoreMembers();
+        }
+    }
+
+    @Override
+    public void redo() {
+        for (Shape s : allDeletedShapes) {
+            manager.removeShape(s);
         }
     }
 }
