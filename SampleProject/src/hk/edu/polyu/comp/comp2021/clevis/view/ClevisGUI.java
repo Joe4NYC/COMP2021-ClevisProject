@@ -21,7 +21,6 @@ public class ClevisGUI extends JFrame {
     private JButton zoomOutButton;
     private JButton resetViewButton;
     
-    // 核心方法
     public ClevisGUI(String htmlPath, String txtPath) {
         super("=== Clevis – Graphical Vector Graphics Software ===");
         this.shapeManager = new ShapeManager();
