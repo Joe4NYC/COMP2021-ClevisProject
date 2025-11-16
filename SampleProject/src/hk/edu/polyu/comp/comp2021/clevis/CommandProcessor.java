@@ -77,17 +77,18 @@ public class CommandProcessor {
                     System.out.println(manager.listAll());
                     return false;
                 }
-                case "quit" -> System.exit(0);
-                default -> {
-                    System.out.println("Unknown command: " + cmd);
-                    return false;
-                }
                 case "undo" -> {
                     manager.undo();
                 }
                 case "redo" -> {
                     manager.redo(); 
                 }
+                case "quit" -> System.exit(0);
+                default -> {
+                    System.out.println("Unknown command: " + cmd);
+                    return false;
+                }
+
             }
             return true;
         } catch (Exception e) {
