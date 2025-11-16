@@ -26,13 +26,22 @@ public class ShapeManager{
         shapes.put(name, new Square(name, x, y, s));
     }
 
-    public void group(String groupName, String[] members) {
+    public void group(String rawCommand) {
+        String[] tokens = rawCommand.trim().split("\\s+");
+        if (tokens.length < 3) {
+            throw new IllegalArgumentException("Group command requires at least a name and one member");
+        }
+        
+        String groupName = tokens[1];
+        checkNameAvailable(groupName);
+        
         List<Shape> allShapes = new ArrayList<>();
-        for(String member : members) {
-            Shape s = shapes.remove(member);
-            if (s != null) {
-                allShapes.add(s);
+        for (int i = 2; i < tokens.length; i++) {
+            Shape s = shapes.remove(tokens[i]);
+            if (s == null) {
+                throw new IllegalArgumentException("Shape not found: " + tokens[i]);
             }
+            allShapes.add(s);
         }
         shapes.put(groupName, new Group(groupName, allShapes));
     }
@@ -95,18 +104,21 @@ public class ShapeManager{
                 b2[1] < b1[1] + b1[3]);
     }
 
-    public void listAll() {
+    public String listAll() {
+        StringBuilder sb = new StringBuilder();
         for (Shape s : shapes.values()) {
             if (s instanceof Group) {
                 Group group = (Group) s;
-                System.out.println("Group " + group.name + ":");
+                sb.append("Group ").append(group.name).append(":");
                 for (Shape child : group.getMembers()) {
-                    System.out.println("  " + child.name);
+                    sb.append("\n ").append(child.getName());
                 }
             } else {
-                System.out.println("Shape: " + s.name);
+                sb.append(s.describe());
             }
+            sb.append("\n");
         }
+        return sb.toString();
     }
 
     public String describeString(String name) {

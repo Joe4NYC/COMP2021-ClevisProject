@@ -2,7 +2,6 @@ package hk.edu.polyu.comp.comp2021.clevis;
 
 import hk.edu.polyu.comp.comp2021.clevis.model.Logger;
 import hk.edu.polyu.comp.comp2021.clevis.model.ShapeManager;
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -10,8 +9,8 @@ import java.util.Scanner;
 public class Application {
 
     public static void main(String[] args) {
-        String htmlPath = null;
-        String txtPath = null;
+        String htmlPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.html";
+        String txtPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.txt";
 
         for (int i = 0; i < args.length; i++) {
             if ("-html".equalsIgnoreCase(args[i]) && i + 1 < args.length) {

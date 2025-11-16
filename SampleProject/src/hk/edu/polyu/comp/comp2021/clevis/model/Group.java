@@ -19,10 +19,10 @@ public class Group extends Shape {
     }
 
     public double[] getBoundingBox(){
-        double minX = Double.MAX_VALUE, 
+        double minX = Double.MAX_VALUE;
         double minY = Double.MAX_VALUE;
-        double maxX = -Double.MIN_VALUE
-        double maxY = -Double.MIN_VALUE;
+        double maxX = -Double.MAX_VALUE;
+        double maxY = -Double.MAX_VALUE;
 
         for(Shape s : allShapes){
             double[] wholeBoundingBox = s.getBoundingBox();
@@ -41,6 +41,15 @@ public class Group extends Shape {
             }
         }
         return false;
+    }
+
+    public boolean intersect(Shape other) {
+        double[] b1 = this.getBoundingBox();
+        double[] b2 = other.getBoundingBox();
+        return (b1[0] < b2[0] + b2[2] &&
+                b2[0] < b1[0] + b1[2] &&
+                b1[1] < b2[1] + b2[3] &&
+                b2[1] < b1[1] + b1[3]);
     }
 
     public String describe(){
