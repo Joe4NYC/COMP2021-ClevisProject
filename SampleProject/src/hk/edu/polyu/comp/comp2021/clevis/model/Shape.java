@@ -23,6 +23,10 @@ public abstract class Shape {
         return zOrder;
     }
 
+    public void setZOrder(int zOrder) { 
+        this.zOrder = zOrder; 
+    }
+
     public String getName() {
         return name;
     }
