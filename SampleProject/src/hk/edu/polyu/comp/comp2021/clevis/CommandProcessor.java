@@ -83,12 +83,13 @@ public class CommandProcessor {
                     return false;
                 }
                 case "undo" -> {
-                    shapeManager.undo();
+                    manager.undo();
                 }
                 case "redo" -> {
-                    shapeManager.redo(); 
+                    manager.redo(); 
                 }
-            return true; 
+            }
+            return true;
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return false;
