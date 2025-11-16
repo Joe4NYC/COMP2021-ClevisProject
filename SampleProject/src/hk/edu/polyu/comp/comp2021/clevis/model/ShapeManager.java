@@ -1,12 +1,11 @@
 package hk.edu.polyu.comp.comp2021.clevis.model;
 
-import java.util.*;
-
 import hk.edu.polyu.comp.comp2021.clevis.model.command.Command;
 import hk.edu.polyu.comp.comp2021.clevis.model.command.CreateShapeCommand;
 import hk.edu.polyu.comp.comp2021.clevis.model.command.DeleteCommand;
 import hk.edu.polyu.comp.comp2021.clevis.model.command.GroupCommand;
 import hk.edu.polyu.comp.comp2021.clevis.model.command.MoveCommand;
+import java.util.*;
 
 public class ShapeManager{
     private Map<String, Shape> shapes = new LinkedHashMap<>();
@@ -59,19 +58,28 @@ public class ShapeManager{
             }
             allShapes.add(s);
         }
-        shapes.put(groupName, new Group(groupName, allShapes));
 
+        if (allShapes.isEmpty()) {
+            throw new IllegalArgumentException("Cannot create empty group: " + groupName);
+        }
+
+        shapes.put(groupName, new Group(groupName, allShapes));
         undoStack.push(new GroupCommand(this, shapes.get(groupName), allShapes));
         redoStack.clear();
     }
 
     public void ungroup(String groupName) {
         Shape g = shapes.remove(groupName);
-        if (g instanceof Group) {
-            Group group = (Group) g;
-            for (Shape shapeInGroup : group.getMembers()) {
-                shapes.put(shapeInGroup.name, shapeInGroup);
-            }
+        if (g == null) {
+            throw new IllegalArgumentException("Group not found: " + groupName);
+        }
+        if (!(g instanceof Group)) {
+            throw new IllegalArgumentException("Shape is not a group: " + groupName);
+        }
+        
+        Group group = (Group) g;
+        for (Shape shapeInGroup : group.getMembers()) {
+            shapes.put(shapeInGroup.getName(), shapeInGroup);
         }
 
         undoStack.push(new GroupCommand(this, g, ((Group) g).getMembers()));
@@ -91,6 +99,9 @@ public class ShapeManager{
 
     public void delete(String name) {
     Shape s = shapes.get(name);
+    if (s == null) {
+        throw new IllegalArgumentException("Shape not found");
+    }
     
     List<Shape> deleted = new ArrayList<>();
     collectAll(s, deleted);
@@ -105,8 +116,7 @@ public class ShapeManager{
 
     private void collectAll(Shape s, List<Shape> list) {
         list.add(s);
-        if (s instanceof Group) {
-            Group g = (Group) s;
+        if (s instanceof Group g) {
             for (Shape m : g.getMembers()) {
                 collectAll(m, list);
             }
@@ -149,11 +159,14 @@ public class ShapeManager{
     }
 
     public String listAll() {
+        if (shapes.isEmpty()) {
+            return "No shapes available.";
+        }
         StringBuilder sb = new StringBuilder();
         for (Shape s : shapes.values()) {
             if (s instanceof Group) {
                 Group group = (Group) s;
-                sb.append("Group ").append(group.name).append(":");
+                sb.append("Group ").append(group.getName()).append(":");
                 for (Shape child : group.getMembers()) {
                     sb.append("\n ").append(child.getName());
                 }

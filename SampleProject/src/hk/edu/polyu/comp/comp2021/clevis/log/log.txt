@@ -1,8 +1,0 @@
-rectangle r1 0 0 10 10
-rectangle r2 20 0 10 10
-circle c1 15 15 5
-line l1 0 20 30 20
-group g1 r1 r2
-move g1 10 10
-group g2 g1 c1 l1
-ungroup g2
