@@ -105,7 +105,8 @@ public class ShapeManager{
 
     private void collectAll(Shape s, List<Shape> list) {
         list.add(s);
-        if (s instanceof Group g) {
+        if (s instanceof Group) {
+            Group g = (Group) s;
             for (Shape m : g.getMembers()) {
                 collectAll(m, list);
             }
