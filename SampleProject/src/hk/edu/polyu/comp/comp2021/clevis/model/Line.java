@@ -79,4 +79,9 @@ public class Line extends Shape {
     public double getY() {
         return Math.min(y, y2);
     }
+    
+    public double getX1() { return x; }
+    public double getY1() { return y; }
+    public double getX2() { return x2; }
+    public double getY2() { return y2; }
 }

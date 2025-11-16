@@ -84,4 +84,7 @@ public class Group extends Shape {
         return minY;
     }
 
+    public List<Shape> getShapes() {
+        return allShapes;
+    }
 }
