@@ -68,15 +68,6 @@ public class GraphicsPanel extends JPanel {
         Rectangle2D.Double r = new Rectangle2D.Double(x, y, width, height);
         
         g2d.draw(r);
-        
-        Color fillColor = new Color(
-            g2d.getColor().getRed(),
-            g2d.getColor().getGreen(),
-            g2d.getColor().getBlue(),
-            50
-        );
-        g2d.setColor(fillColor);
-        g2d.fill(r);
     }
 
     private void drawCircle(Graphics2D g2d, Circle circle) {
@@ -88,28 +79,15 @@ public class GraphicsPanel extends JPanel {
         Ellipse2D.Double ellipse = new Ellipse2D.Double(x, y, diameter, diameter);
         
         g2d.draw(ellipse);
-        
-        Color originalColor = g2d.getColor();
-        g2d.setColor(new Color(
-            originalColor.getRed(),
-            originalColor.getGreen(),
-            originalColor.getBlue(),
-            50
-        ));
-        g2d.fill(ellipse);
-        g2d.setColor(originalColor);
     }
 
     private void drawLine(Graphics2D g2d, Line line) {
-        double[] bbox = line.getBoundingBox();
-
         Line2D.Double l = new Line2D.Double(
             line.getX1(),
             line.getY1(),
             line.getX2(),
             line.getY2()
         );
-
         g2d.draw(l);
     }
 
@@ -118,22 +96,9 @@ public class GraphicsPanel extends JPanel {
     }
 
     private void drawGroup(Graphics2D g2d, Group group) {
-        double[] bbox = group.getBoundingBox();
-
-        float[] dashPattern = {10.0f, 5.0f};
-        g2d.setStroke(new BasicStroke(
-            (float)(3.0 / scale),
-            BasicStroke.CAP_BUTT,
-            BasicStroke.JOIN_MITER,
-            10.0f,
-            dashPattern,
-            0.0f
-        ));
-
-        Rectangle2D.Double groupBox = new Rectangle2D.Double(
-            bbox[0], bbox[1], bbox[2], bbox[3]
-        );
-        g2d.draw(groupBox);
+        for (Shape shape : group.getShapes()) {
+            drawShape(g2d, shape);
+        }
     }
     
     public void zoomIn() {

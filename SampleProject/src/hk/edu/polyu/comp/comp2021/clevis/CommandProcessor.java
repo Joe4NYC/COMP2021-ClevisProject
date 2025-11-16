@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp.comp2021.clevis;
 
+import hk.edu.polyu.comp.comp2021.clevis.model.Shape;
 import hk.edu.polyu.comp.comp2021.clevis.model.ShapeManager;
 
 
@@ -64,8 +65,8 @@ public class CommandProcessor {
                 }
                 case "shapeat" -> {
                     checkArgs(tokens, 3);
-                    System.out.println(manager.shapeAt(
-                            Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
+                    Shape found = manager.shapeAt(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]));
+                    System.out.println(found == null ? "" : found.getName());
                     return false;
                 }
                 case "list" -> {
