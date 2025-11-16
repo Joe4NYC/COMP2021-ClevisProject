@@ -13,12 +13,12 @@ public class CreateShapeCommand implements Command {
     }
 
     @Override
-    public void execute() {
-        manager.addShapeDirectly(shape);
+    public void undo() {
+        manager.removeShape(shape);
     }
 
     @Override
-    public void undo() {
-        manager.removeShape(shape);
+    public void redo() {
+        manager.addShapeDirectly(shape);
     }
 }
