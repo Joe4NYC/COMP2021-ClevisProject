@@ -2,9 +2,14 @@ package hk.edu.polyu.comp.comp2021.clevis.model;
 
 import java.util.*;
 
+import hk.edu.polyu.comp.comp2021.clevis.model.command.Command;
+import hk.edu.polyu.comp.comp2021.clevis.model.command.GroupCommand;
+
 public class ShapeManager{
     private Map<String, Shape> shapes = new LinkedHashMap<>();
     private final List<Shape> zOrderList = new ArrayList<>();
+    private final Deque<Command> undoStack = new ArrayDeque<>();
+    private final Deque<Command> redoStack = new ArrayDeque<>();
 
     public void createRectangle(String name, double x, double y, double w, double h) {
         checkNameAvailable(name);
@@ -44,6 +49,9 @@ public class ShapeManager{
             allShapes.add(s);
         }
         shapes.put(groupName, new Group(groupName, allShapes));
+
+        undoStack.push(new GroupCommand(this, shapes.get(groupName), allShapes));
+        redoStack.clear();
     }
 
     public void ungroup(String groupName) {
@@ -54,6 +62,9 @@ public class ShapeManager{
                 shapes.put(shapeInGroup.name, shapeInGroup);
             }
         }
+
+        undoStack.push(new GroupCommand(this, g, ((Group) g).getMembers()));
+        redoStack.clear();
     }
 
     public void move(String name, double dx, double dy) {
@@ -162,5 +173,5 @@ public class ShapeManager{
         shapes.remove(shape.getName());
         zOrderList.remove(shape);
     }
-
+    
 }

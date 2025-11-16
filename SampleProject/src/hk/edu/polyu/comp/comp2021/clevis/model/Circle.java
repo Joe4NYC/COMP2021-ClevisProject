@@ -43,4 +43,14 @@ public class Circle extends Shape {
     public String describe(){
         return String.format("Circle %s: center=(%.2f,%.2f), r=%.2f", name, centerX, centerY, r);
     }
-}
+
+    @Override
+    public double getX() { 
+        return centerX; 
+    }
+
+    @Override
+    public double getY() { 
+        return centerY; 
+    }
+}   

@@ -48,4 +48,14 @@ public class Rectangle extends Shape {
     public double getHeight() {
         return height;
     }
+
+    @Override
+    public double getX() {
+        return x;
+    }
+
+    @Override
+    public double getY() {
+        return y;
+    }
 }

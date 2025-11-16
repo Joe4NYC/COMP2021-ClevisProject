@@ -73,4 +73,10 @@ public class Line extends Shape {
             return String.format("Line %s: (%.2f,%.2f) -> (%.2f,%.2f)", name, x, y, x2, y2);
         }
         
+    public double getX() {
+        return Math.min(x, x2);
     }
+    public double getY() {
+        return Math.min(y, y2);
+    }
+}

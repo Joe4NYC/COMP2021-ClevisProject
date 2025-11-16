@@ -13,9 +13,9 @@ public class GroupCommand implements Command {
     private final Group group;   
     private final List<Shape> members; 
 
-    public GroupCommand(ShapeManager manager, Group group, List<Shape> members) {
+    public GroupCommand(ShapeManager manager, Shape group, List<Shape> members) {
         this.manager = manager;
-        this.group = group;
+        this.group = (Group) group;
         this.members = new ArrayList<>(members);
     }
 

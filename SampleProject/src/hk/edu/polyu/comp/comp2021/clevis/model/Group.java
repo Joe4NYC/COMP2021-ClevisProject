@@ -65,4 +65,23 @@ public class Group extends Shape {
     public List<Shape> getMembers() {
         return new ArrayList<>(allShapes);
     }
+
+    @Override
+    public double getX() {
+        double minX = Double.MAX_VALUE;
+        for (Shape s : allShapes) {
+            minX = Math.min(minX, s.getX());
+        }
+        return minX;
+    }
+
+    @Override
+    public double getY() {
+        double minY = Double.MAX_VALUE;
+        for (Shape s : allShapes) {
+            minY = Math.min(minY, s.getY());
+        }
+        return minY;
+    }
+
 }
