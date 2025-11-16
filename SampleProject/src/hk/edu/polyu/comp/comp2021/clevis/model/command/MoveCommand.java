@@ -2,7 +2,7 @@ package hk.edu.polyu.comp.comp2021.clevis.model.command;
 
 import hk.edu.polyu.comp.comp2021.clevis.model.Shape;
 
-public class MoveCommand {
+public class MoveCommand implements Command {
     private final Shape shape;
     private final double changeX;
     private final double changeY;
