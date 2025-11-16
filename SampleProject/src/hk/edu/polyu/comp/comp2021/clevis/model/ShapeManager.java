@@ -79,7 +79,7 @@ public class ShapeManager{
         
         Group group = (Group) g;
         for (Shape shapeInGroup : group.getMembers()) {
-            shapes.put(shapeInGroup.name, shapeInGroup);
+            shapes.put(shapeInGroup.getName(), shapeInGroup);
         }
 
         undoStack.push(new GroupCommand(this, g, ((Group) g).getMembers()));
@@ -166,7 +166,7 @@ public class ShapeManager{
         for (Shape s : shapes.values()) {
             if (s instanceof Group) {
                 Group group = (Group) s;
-                sb.append("Group ").append(group.name).append(":");
+                sb.append("Group ").append(group.getName()).append(":");
                 for (Shape child : group.getMembers()) {
                     sb.append("\n ").append(child.getName());
                 }
