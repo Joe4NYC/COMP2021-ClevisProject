@@ -1,6 +1,5 @@
 package hk.edu.polyu.comp.comp2021.clevis;
 
-import hk.edu.polyu.comp.comp2021.clevis.model.Shape;
 import hk.edu.polyu.comp.comp2021.clevis.model.ShapeManager;
 
 
@@ -71,7 +70,7 @@ public class CommandProcessor {
                 }
                 case "list" -> {
                     checkArgs(tokens, 2);
-                    System.out.println(manager.listAll());
+                    System.out.println(manager.list(tokens[1]));
                     return false;
                 }
                 case "listall" -> {
