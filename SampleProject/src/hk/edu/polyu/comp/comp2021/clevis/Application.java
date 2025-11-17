@@ -37,7 +37,7 @@ public class Application {
             SwingUtilities.invokeLater(() -> {
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception e) {
+                } catch (Exception ignored) {
                 }
                 new ClevisGUI(finalHtmlPath, finalTxtPath);
             });

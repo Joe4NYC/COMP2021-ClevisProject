@@ -39,6 +39,7 @@ public class GraphicsPanel extends JPanel {
         resetView();
     }
     
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         

@@ -10,21 +10,26 @@ public class Circle extends Shape {
         this.centerY = centerY;
         this.r = radius;
     }
-    
+
+    @Override
     public void move(double dx, double dy){ 
         centerX += dx; 
         centerY += dy; 
     }
 
+    @Override
     public double[] getBoundingBox(){
         return new double[]{centerX - r, centerY - r, 2*r, 2*r};
     }
     private static final double boundary = 0.05;
+
+    @Override
     public boolean coverPoint(double px, double py){
         double dist = Math.sqrt(Math.pow(px - centerX, 2) + Math.pow(py - centerY, 2));
         return Math.abs(dist - r) < boundary;
     }
 
+    @Override
     public boolean intersect(Shape other) {
         if (other instanceof Circle) {
             Circle c = (Circle) other;
@@ -40,6 +45,7 @@ public class Circle extends Shape {
         }
     }
 
+    @Override
     public String describe(){
         return String.format("Circle %s: center=(%.2f,%.2f), r=%.2f", name, centerX, centerY, r);
     }

@@ -16,6 +16,7 @@ public class Line extends Shape {
         this.y2 = y2;
     }
     
+    @Override
     public void move(double dx, double dy){
         x += dx;
         y += dy;
@@ -23,6 +24,7 @@ public class Line extends Shape {
         y2 += dy;
     }
 
+    @Override
     public double[] getBoundingBox(){
         double minX = Math.min(x, x2);
         double minY = Math.min(y, y2);
@@ -31,6 +33,7 @@ public class Line extends Shape {
         return new double[]{minX, minY, width, height};
     }
 
+    @Override
     public boolean coverPoint(double px, double py){
         double dx = x2 - x;
         double dy = y2 -y;
@@ -49,6 +52,7 @@ public class Line extends Shape {
         return true;
     }
 
+    @Override
     public boolean intersect(Shape other) {
         if (other instanceof Line) {
             Line line2 = (Line) other;
@@ -69,13 +73,16 @@ public class Line extends Shape {
         }
     }
 
+        @Override
         public String describe() {
             return String.format("Line %s: (%.2f,%.2f) -> (%.2f,%.2f)", name, x, y, x2, y2);
         }
         
+    @Override
     public double getX() {
         return Math.min(x, x2);
     }
+    @Override
     public double getY() {
         return Math.min(y, y2);
     }

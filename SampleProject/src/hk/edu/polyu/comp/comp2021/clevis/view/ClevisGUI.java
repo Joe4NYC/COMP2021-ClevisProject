@@ -215,7 +215,7 @@ public class ClevisGUI extends JFrame {
         SwingUtilities.invokeLater(() -> {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
         
         new ClevisGUI(htmlPath, txtPath); 

@@ -15,19 +15,23 @@ public class Rectangle extends Shape {
         this.height = height;
     }
     
+    @Override
     public double[] getBoundingBox() {
         return new double[]{x, y, width, height};
     }
     
+    @Override
     public void move(double dx, double dy) {
         x += dx; 
         y += dy;
     }
     
+    @Override
     public boolean coverPoint(double px, double py) {
         return (px >= x && px <= x + width && py >= y && py <= y + height);
     }
 
+    @Override
     public boolean intersect(Shape other) {
         double[] b1 = this.getBoundingBox();
         double[] b2 = other.getBoundingBox();
@@ -37,6 +41,7 @@ public class Rectangle extends Shape {
                 b2[1] < b1[1] + b1[3]);
     }
 
+    @Override
     public String describe() {
         return String.format("Rectangle %s: topLeft=(%.2f,%.2f), w=%.2f, h=%.2f", name, x, y, width, height);
     }

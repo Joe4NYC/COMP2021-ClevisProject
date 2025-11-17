@@ -13,10 +13,14 @@ public class MoveCommand implements Command {
         this.changeY = changeY;
     }
 
+    @Override
+    @Override
     public void redo() {
         shape.move(changeX, changeY);
     }
 
+    @Override
+    @Override
     public void undo() {
         shape.move(-changeX, -changeY);
     }
