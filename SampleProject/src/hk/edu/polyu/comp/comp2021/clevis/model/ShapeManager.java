@@ -303,16 +303,13 @@ public class ShapeManager{
             throw new IllegalArgumentException("Name already used: " + name);
         }
     }
-<<<<<<< HEAD
-    private static final int rounding = 100;
-=======
 
+    private static final int rounding = 100;
     /**
      * Rounds a value to 2 decimal
      * @param val value to be rounded
      * @return return rounded value
      */
->>>>>>> 4f93275c71a758dce38bf4ebc2a95ff6d0494926
     private double round(double val) {
         return (double) Math.round(val * rounding) / rounding;
     }
