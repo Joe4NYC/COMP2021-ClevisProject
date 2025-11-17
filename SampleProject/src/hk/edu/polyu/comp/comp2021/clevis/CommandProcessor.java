@@ -2,9 +2,17 @@ package hk.edu.polyu.comp.comp2021.clevis;
 
 import hk.edu.polyu.comp.comp2021.clevis.model.ShapeManager;
 
-
+/**
+ * Handing user commands' input
+ */
 public class CommandProcessor {
 
+    /**
+     * Using switch-case to identify what method being calling
+     * @param rawCommand user commands input
+     * @param manager importing shapeManager method
+     * @return exit
+     */
     public static boolean execute(String rawCommand, ShapeManager manager) {
         if (rawCommand == null || rawCommand.trim().isEmpty()) return false;
 
