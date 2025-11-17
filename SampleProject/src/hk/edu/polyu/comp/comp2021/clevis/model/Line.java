@@ -33,7 +33,6 @@ public class Line extends Shape {
         this.setX2(x2);
         this.setY2(y2);
     }
-<<<<<<< HEAD
 
     /**
      * Moves the line by the given delta values.
@@ -41,10 +40,7 @@ public class Line extends Shape {
      * @param dx amount to move along the x-axis
      * @param dy amount to move along the y-axis
      */
-=======
-    
     @Override
->>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public void move(double dx, double dy){
         setX(getX() + dx);
         setY(getY() + dy);
@@ -52,15 +48,12 @@ public class Line extends Shape {
         setY2(getY2() + dy);
     }
 
-<<<<<<< HEAD
     /**
      * Returns the bounding box of the line segment.
      *
      * @return an array [minX, minY, maxX, maxY]
      */
-=======
     @Override
->>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public double[] getBoundingBox(){
         double minX = Math.min(getX(), getX2());
         double minY = Math.min(getY(), getY2());
@@ -69,7 +62,6 @@ public class Line extends Shape {
         return new double[]{minX, minY, width, height};
     }
 
-<<<<<<< HEAD
     /**
      * Checks whether the line covers the given point.
      *
@@ -77,9 +69,7 @@ public class Line extends Shape {
      * @param py y-coordinate of the point
      * @return true if the point lies on the line segment, false otherwise
      */
-=======
     @Override
->>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public boolean coverPoint(double px, double py){
         double dx = getX2() - getX();
         double dy = getY2() - getY();
@@ -98,16 +88,13 @@ public class Line extends Shape {
         return true;
     }
 
-<<<<<<< HEAD
     /**
      * Checks whether this line intersects with another shape.
      *
      * @param other the other shape
      * @return true if the line intersects with the other shape
      */
-=======
     @Override
->>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public boolean intersect(Shape other) {
         if (other instanceof Line) {
             Line line2 = (Line) other;
@@ -128,12 +115,12 @@ public class Line extends Shape {
         }
     }
 
-<<<<<<< HEAD
     /**
      * Returns a textual description of the line.
      *
      * @return formatted description string
      */
+    @Override
     public String describe() {
         return String.format("Line %s: (%.2f,%.2f) -> (%.2f,%.2f)", name, x, y, x2, y2);
     }
@@ -143,42 +130,26 @@ public class Line extends Shape {
      *
      * @return min x-coordinate
      */
-=======
-        @Override
-        public String describe() {
-            return String.format("Line %s: (%.2f,%.2f) -> (%.2f,%.2f)", name, getX(), getY(), getX2(), getY2());
-        }
-        
     @Override
->>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public double getX() {
         return Math.min(x, getX2());
     }
-<<<<<<< HEAD
 
     /**
      * Returns the minimum y-coordinate of the line.
      *
      * @return min y-coordinate
      */
-=======
     @Override
->>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public double getY() {
         return Math.min(y, getY2());
     }
-<<<<<<< HEAD
 
     /** @return x-coordinate of the first endpoint */
     public double getX1() { return x; }
     /** @return y-coordinate of the first endpoint */
     public double getY1() { return y; }
     /** @return x-coordinate of the second endpoint */
-=======
-    
-    public double getX1() { return getX(); }
-    public double getY1() { return getY(); }
->>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public double getX2() { return x2; }
     /** @return y-coordinate of the second endpoint */
     public double getY2() { return y2; }

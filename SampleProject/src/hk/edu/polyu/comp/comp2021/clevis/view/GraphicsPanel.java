@@ -8,13 +8,7 @@ import java.awt.geom.*;
 import java.util.*;
 import javax.swing.*;
 
-<<<<<<< HEAD
 @SuppressWarnings("ALL")
-=======
-/**
- * BON1 GUI implementing - shape drawing
- */
->>>>>>> 4f93275c71a758dce38bf4ebc2a95ff6d0494926
 public class GraphicsPanel extends JPanel {
     private ShapeManager shapeManager;
     private double scale = 1.0;
