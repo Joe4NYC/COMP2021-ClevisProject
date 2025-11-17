@@ -7,6 +7,9 @@ import java.awt.event.*;
 import java.io.IOException;
 import javax.swing.*;
 
+/**
+ * BON1 GUI Implementing
+ */
 public class ClevisGUI extends JFrame {
 
     private ShapeManager shapeManager;
@@ -20,7 +23,12 @@ public class ClevisGUI extends JFrame {
     private JButton zoomInButton;
     private JButton zoomOutButton;
     private JButton resetViewButton;
-    
+
+    /**
+     * Deciding Log path and calling all the methods
+     * @param htmlPath html path
+     * @param txtPath txt path
+     */
     public ClevisGUI(String htmlPath, String txtPath) {
         super("Clevis – Graphical Vector Graphics Software");
         this.shapeManager = new ShapeManager();
@@ -186,7 +194,11 @@ public class ClevisGUI extends JFrame {
             System.exit(0);
         }
     }
-    
+
+    /**
+     * GUI Main program
+     * @param args user input log path
+     */
     public static void main(String[] args) {
         String htmlPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.html";
         String txtPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.txt";

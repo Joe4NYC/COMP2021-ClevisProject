@@ -8,6 +8,9 @@ import java.awt.geom.*;
 import java.util.*;
 import javax.swing.*;
 
+/**
+ * BON1 GUI implementing - shape drawing
+ */
 public class GraphicsPanel extends JPanel {
     private ShapeManager shapeManager;
     private double scale = 1.0;
@@ -19,6 +22,10 @@ public class GraphicsPanel extends JPanel {
     private static final double MIN_SCALE = 0.1; 
     private static final double MAX_SCALE = 10.0;
 
+    /**
+     * Initialization
+     * @param shapeManager importing shapeManager method
+     */
     public GraphicsPanel(ShapeManager shapeManager) {
         this.shapeManager = shapeManager;
         
@@ -100,7 +107,10 @@ public class GraphicsPanel extends JPanel {
             drawShape(g2d, shape);
         }
     }
-    
+
+    /**
+     * Zoom in button design
+     */
     public void zoomIn() {
         if (scale < MAX_SCALE) {
             scale *= 1.2;
@@ -108,6 +118,9 @@ public class GraphicsPanel extends JPanel {
         }
     }
 
+    /**
+     * Zoom out button design
+     */
     public void zoomOut() {
     if (scale > MIN_SCALE) {
         scale /= 1.2;
@@ -115,6 +128,9 @@ public class GraphicsPanel extends JPanel {
         }
     }
 
+    /**
+     * Reset View button design
+     */
     public void resetView() {
         scale = 1.0;
         offsetX = PANEL_WIDTH / 2.0;
@@ -122,6 +138,9 @@ public class GraphicsPanel extends JPanel {
         repaint();
     }
 
+    /**
+     * Redrawing
+     */
     public void refresh() {
         repaint();
     }

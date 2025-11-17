@@ -11,7 +11,10 @@ import javax.swing.UIManager;
 /**handling log and quit */
 public class Application {
 
-    /**Main program */
+    /**
+     * Main Program
+     * @param args user input log path
+     */
     public static void main(String[] args) {
         String htmlPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.html";
         String txtPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.txt";
