@@ -6,9 +6,9 @@ import java.io.PrintWriter;
 
 public class Logger {
     
-    private static int count = 0;
-    private static PrintWriter txt;
-    private static PrintWriter html;
+    private int count = 0;
+    private final PrintWriter txt;
+    private final PrintWriter html;
     
     public Logger(String htmlPath, String txtPath) throws IOException {
         txt = new PrintWriter(new FileWriter(txtPath, false));

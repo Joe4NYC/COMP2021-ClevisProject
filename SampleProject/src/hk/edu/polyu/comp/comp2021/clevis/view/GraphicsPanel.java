@@ -8,6 +8,7 @@ import java.awt.geom.*;
 import java.util.*;
 import javax.swing.*;
 
+@SuppressWarnings("ALL")
 public class GraphicsPanel extends JPanel {
     private ShapeManager shapeManager;
     private double scale = 1.0;

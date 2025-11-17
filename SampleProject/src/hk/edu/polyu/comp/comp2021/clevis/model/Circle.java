@@ -19,11 +19,10 @@ public class Circle extends Shape {
     public double[] getBoundingBox(){
         return new double[]{centerX - r, centerY - r, 2*r, 2*r};
     }
-
+    private static final double boundary = 0.05;
     public boolean coverPoint(double px, double py){
         double dist = Math.sqrt(Math.pow(px - centerX, 2) + Math.pow(py - centerY, 2));
-        double distance = 0.05;
-        return Math.abs(dist - r) < distance;
+        return Math.abs(dist - r) < boundary;
     }
 
     public boolean intersect(Shape other) {

@@ -212,9 +212,9 @@ public class ShapeManager{
             throw new IllegalArgumentException("Name already used: " + name);
         }
     }
-
+    private static final int rounding = 100;
     private double round(double val) {
-        return Math.round(val * 100.0) / 100.0;
+        return (double) Math.round(val * rounding) / rounding;
     }
 
     public Shape get(String name) {

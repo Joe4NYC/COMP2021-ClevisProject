@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import javax.swing.*;
 
+@SuppressWarnings("MagicNumber")
 public class ClevisGUI extends JFrame {
 
     private ShapeManager shapeManager;
@@ -21,6 +22,7 @@ public class ClevisGUI extends JFrame {
     private JButton zoomOutButton;
     private JButton resetViewButton;
     
+    @SuppressWarnings("MagicNumber")
     public ClevisGUI(String htmlPath, String txtPath) {
         super("Clevis – Graphical Vector Graphics Software");
         this.shapeManager = new ShapeManager();
