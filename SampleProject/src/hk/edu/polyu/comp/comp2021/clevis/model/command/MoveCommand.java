@@ -17,11 +17,10 @@ public class MoveCommand implements Command {
     private final double changeY;
 
     /**
-     * Constructs a MoveCommand with the given shape and displacement.
-     *
-     * @param shape   the Shape to be moved
-     * @param changeX the displacement along the X-axis
-     * @param changeY the displacement along the Y-axis
+     * Constructs a MoveCommand with the given shape and displacement
+     * @param shape the shape to be moved
+     * @param changeX the displacement along the x axis
+     * @param changeY the displacement along the y axis
      */
     public MoveCommand(Shape shape, double changeX, double changeY) {
         this.shape = shape;

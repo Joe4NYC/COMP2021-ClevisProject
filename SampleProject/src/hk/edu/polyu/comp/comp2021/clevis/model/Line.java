@@ -73,7 +73,6 @@ public class Line extends Shape {
      */
     @Override
     public boolean coverPoint(double px, double py){
-<<<<<<< HEAD
         double dx = x2 - x;
         double dy = y2 - y;
         double length = Math.sqrt(dx*dx + dy*dy);
@@ -82,19 +81,6 @@ public class Line extends Shape {
 
         double dot = (px - x) * dx + (py - y) * dy;
         if (dot < 0 || dot > dx*dx + dy*dy) {
-=======
-        double dx = getX2() - getX();
-        double dy = getY2() - getY();
-        double length = Math.sqrt(dx*dx + dy*dy);
-
-        double distance = Math.abs((px - getX()) * dy - (py - getY()) * dx) / length;
-        double dot = (px - getX()) * dx + (py - getY()) * dy;
-
-        if(dot < 0){
-            return false;
-        }
-        if(dot > dx * dx + dy * dy){
->>>>>>> f7414fef8027022be8faf6a0605426e5bca6aecd
             return false;
         }
 
@@ -167,18 +153,34 @@ public class Line extends Shape {
     /** @return y-coordinate of the second endpoint */
     public double getY2() { return y2; }
 
+    /**
+     * return x value
+     * @param x the starting of the line in x coordination
+     */
     public void setX(double x) {
         this.x = x;
     }
 
+    /**
+     * return y value
+     * @param y the starting of the line in y coordination
+     */
     public void setY(double y) {
         this.y = y;
     }
 
+    /**
+     * return x2 value
+     * @param x2 the ending of the line in x coordination
+     */
     public void setX2(double x2) {
         this.x2 = x2;
     }
 
+    /**
+     * return y2 value
+     * @param y2 the ending of the line in y coordination
+     */
     public void setY2(double y2) {
         this.y2 = y2;
     }
