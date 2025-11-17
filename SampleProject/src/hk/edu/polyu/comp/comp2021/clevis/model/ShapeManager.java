@@ -128,7 +128,7 @@ public class ShapeManager{
             throw new IllegalArgumentException("Group not found: " + groupName);
         }
         if (!(g instanceof Group)) {
-            throw new IllegalArgumentException("Shape is not a group: " + groupName);
+            throw new IllegalArgumentException(groupName + " is a shape, not a group");
         }
         
         Group group = (Group) g;
