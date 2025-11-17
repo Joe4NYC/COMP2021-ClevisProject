@@ -12,12 +12,14 @@ public class Group extends Shape {
         allShapes.addAll(shapes);
     }
 
+    @Override
     public void move(double dx, double dy){
         for(Shape s : allShapes){
             s.move(dx, dy);
         }
     }
 
+    @Override
     public double[] getBoundingBox(){
         double minX = Double.MAX_VALUE;
         double minY = Double.MAX_VALUE;
@@ -34,6 +36,7 @@ public class Group extends Shape {
         return new double[]{minX, minY, maxX - minX, maxY - minY};
     }
     
+    @Override
     public boolean coverPoint(double x, double y){
         for(Shape s : allShapes){
             if(s.coverPoint(x, y)){
@@ -43,6 +46,7 @@ public class Group extends Shape {
         return false;
     }
 
+    @Override
     public boolean intersect(Shape other) {
         for (Shape s : allShapes) {
             if (s.intersect(other)) {
@@ -52,6 +56,7 @@ public class Group extends Shape {
         return false;
     }
 
+    @Override
     public String describe(){
         StringBuilder sb = new StringBuilder("Group " + getName() + ": ");
         for (Shape s : allShapes) {

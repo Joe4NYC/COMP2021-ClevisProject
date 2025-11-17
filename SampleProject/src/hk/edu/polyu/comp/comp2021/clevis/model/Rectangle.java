@@ -32,6 +32,7 @@ public class Rectangle extends Shape {
         this.width = width;
         this.height = height;
     }
+<<<<<<< HEAD
 
     /**
      * Returns the bounding box of the rectangle.
@@ -48,10 +49,20 @@ public class Rectangle extends Shape {
      * @param dx amount to move along the x-axis
      * @param dy amount to move along the y-axis
      */
+=======
+    
+    @Override
+    public double[] getBoundingBox() {
+        return new double[]{x, y, width, height};
+    }
+    
+    @Override
+>>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public void move(double dx, double dy) {
         x += dx; 
         y += dy;
     }
+<<<<<<< HEAD
 
     /**
      * Checks whether the rectangle covers the given point.
@@ -60,16 +71,24 @@ public class Rectangle extends Shape {
      * @param py y-coordinate of the point
      * @return true if the point lies inside the rectangle, false otherwise
      */
+=======
+    
+    @Override
+>>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public boolean coverPoint(double px, double py) {
         return (px >= x && px <= x + width && py >= y && py <= y + height);
     }
 
+<<<<<<< HEAD
     /**
      * Checks whether this rectangle intersects with another shape.
      *
      * @param other the other shape
      * @return true if the bounding boxes overlap
      */
+=======
+    @Override
+>>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public boolean intersect(Shape other) {
         double[] b1 = this.getBoundingBox();
         double[] b2 = other.getBoundingBox();
@@ -79,11 +98,15 @@ public class Rectangle extends Shape {
                 b2[1] < b1[1] + b1[3]);
     }
 
+<<<<<<< HEAD
     /**
      * Returns a textual description of the rectangle.
      *
      * @return formatted description string
      */
+=======
+    @Override
+>>>>>>> 811ac88c650e8e5ef141c07a634f810b30771d36
     public String describe() {
         return String.format("Rectangle %s: topLeft=(%.2f,%.2f), w=%.2f, h=%.2f", name, x, y, width, height);
     }
