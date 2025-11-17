@@ -15,6 +15,8 @@ public class Line extends Shape {
     private double x2;
     /** y-coordinate of the second endpoint */
     private double y2;
+    /** cover point number */
+    private static final double EDGE_TOLERANCE = 0.05;
 
     /**
      * Constructs a Line object.
@@ -96,7 +98,7 @@ public class Line extends Shape {
             return false;
         }
 
-        return distance < 0.05;
+        return distance < EDGE_TOLERANCE;
     }
 
     /**

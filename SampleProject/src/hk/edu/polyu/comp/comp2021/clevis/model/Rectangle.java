@@ -14,6 +14,8 @@ public class Rectangle extends Shape {
     private double width;
     /** height of the rectangle */
     private double height;
+    /** cover number number */
+    private static final double EDGE_TOLERANCE = 0.05;
 
     /**
      * Constructs a Rectangle object.
@@ -71,7 +73,7 @@ public class Rectangle extends Shape {
 
         if (px >= x && px <= x + width && py >= y && py <= y + height) {
             double minDist = Math.min(Math.min(distLeft, distRight), Math.min(distTop, distBottom));
-            return minDist < 0.05;
+            return minDist < EDGE_TOLERANCE;
         }
         return false;
     }
