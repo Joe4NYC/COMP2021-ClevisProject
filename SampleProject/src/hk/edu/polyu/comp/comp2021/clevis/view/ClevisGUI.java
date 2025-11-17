@@ -60,7 +60,9 @@ public class ClevisGUI extends JFrame {
         setupListeners();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 800);
+        int width = 1200;
+        int height = 800;
+        setSize(width, height);
         setVisible(true);
 
         appendOutput("=== Clevis - Graphical Mode ===");

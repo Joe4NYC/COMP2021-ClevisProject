@@ -2,39 +2,41 @@ package hk.edu.polyu.comp.comp2021.clevis.model;
 
 public class Circle extends Shape {
     
-    private double centerX, centerY, r;
+    private double centerX;
+    private double centerY;
+    private double r;
 
     public Circle(String name, double centerX, double centerY, double radius, int zOrder){
         super(name, zOrder); 
-        this.centerX = centerX; 
-        this.centerY = centerY;
-        this.r = radius;
+        this.setCenterX(centerX);
+        this.setCenterY(centerY);
+        this.setR(radius);
     }
 
     @Override
     public void move(double dx, double dy){ 
-        centerX += dx; 
-        centerY += dy; 
+        setCenterX(getCenterX() + dx);
+        setCenterY(getCenterY() + dy);
     }
 
     @Override
     public double[] getBoundingBox(){
-        return new double[]{centerX - r, centerY - r, 2*r, 2*r};
+        return new double[]{getCenterX() - getR(), getCenterY() - getR(), 2* getR(), 2* getR()};
     }
     private static final double boundary = 0.05;
 
     @Override
     public boolean coverPoint(double px, double py){
-        double dist = Math.sqrt(Math.pow(px - centerX, 2) + Math.pow(py - centerY, 2));
-        return Math.abs(dist - r) < boundary;
+        double dist = Math.sqrt(Math.pow(px - getCenterX(), 2) + Math.pow(py - getCenterY(), 2));
+        return Math.abs(dist - getR()) < boundary;
     }
 
     @Override
     public boolean intersect(Shape other) {
         if (other instanceof Circle) {
             Circle c = (Circle) other;
-            double distCenters = Math.sqrt(Math.pow(centerX - c.centerX, 2) + Math.pow(centerY - c.centerY, 2));
-            return distCenters <= (this.r + c.r);
+            double distCenters = Math.sqrt(Math.pow(getCenterX() - c.getCenterX(), 2) + Math.pow(getCenterY() - c.getCenterY(), 2));
+            return distCenters <= (this.getR() + c.getR());
         } else {
             double[] b1 = this.getBoundingBox();
             double[] b2 = other.getBoundingBox();
@@ -47,16 +49,40 @@ public class Circle extends Shape {
 
     @Override
     public String describe(){
-        return String.format("Circle %s: center=(%.2f,%.2f), r=%.2f", name, centerX, centerY, r);
+        return String.format("Circle %s: center=(%.2f,%.2f), r=%.2f", name, getCenterX(), getCenterY(), getR());
     }
 
     @Override
     public double getX() { 
-        return centerX; 
+        return getCenterX();
     }
 
     @Override
     public double getY() { 
-        return centerY; 
+        return getCenterY();
     }
-}   
+
+    public double getCenterX() {
+        return centerX;
+    }
+
+    public void setCenterX(double centerX) {
+        this.centerX = centerX;
+    }
+
+    public double getR() {
+        return r;
+    }
+
+    public void setR(double r) {
+        this.r = r;
+    }
+
+    public double getCenterY() {
+        return centerY;
+    }
+
+    public void setCenterY(double centerY) {
+        this.centerY = centerY;
+    }
+}
