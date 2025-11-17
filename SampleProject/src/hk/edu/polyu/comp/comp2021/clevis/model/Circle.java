@@ -1,9 +1,21 @@
 package hk.edu.polyu.comp.comp2021.clevis.model;
 
+/**
+ * Represents a circle shape with a center and radius.
+ */
 public class Circle extends Shape {
     
     private double centerX, centerY, r;
 
+    /**
+     * Constructs a Circle object.
+     *
+     * @param name     the name of the circle
+     * @param centerX  the x-coordinate of the center
+     * @param centerY  the y-coordinate of the center
+     * @param radius   the radius of the circle
+     * @param zOrder   the rendering order
+     */
     public Circle(String name, double centerX, double centerY, double radius, int zOrder){
         super(name, zOrder); 
         this.centerX = centerX; 
