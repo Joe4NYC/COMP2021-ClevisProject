@@ -8,9 +8,10 @@ import java.util.Scanner;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-
+/**handling log and quit */
 public class Application {
 
+    /**Main program */
     public static void main(String[] args) {
         String htmlPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.html";
         String txtPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.txt";
