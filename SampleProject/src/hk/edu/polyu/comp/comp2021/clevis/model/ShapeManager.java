@@ -164,16 +164,20 @@ public class ShapeManager{
         }
         double[] b1 = s1.getBoundingBox();
         double[] b2 = s2.getBoundingBox();
-        return (b1[0] < b2[0] + b2[2] &&
-                b2[0] < b1[0] + b1[2] &&
-                b1[1] < b2[1] + b2[3] &&
-                b2[1] < b1[1] + b1[3]);
+        return (b1[0] <= b2[0] + b2[2] &&
+                b2[0] <= b1[0] + b1[2] &&
+                b1[1] <= b2[1] + b2[3] &&
+                b2[1] <= b1[1] + b1[3]);
     }
 
     public String listAll() {
         if (shapes.isEmpty()) {
             return "No shapes available.";
         }
+
+        List<Shape> sortedShapes = new ArrayList<>(shapes.values());
+        sortedShapes.sort((a, b) -> Integer.compare(b.getZOrder(), a.getZOrder()));
+
         StringBuilder sb = new StringBuilder();
         for (Shape s : shapes.values()) {
             if (s instanceof Group) {
@@ -190,7 +194,7 @@ public class ShapeManager{
         return sb.toString();
     }
 
-    public String describeString(String name) {
+    public String list(String name) {
         Shape s = shapes.get(name);
         if(s != null){
             return s.describe();
