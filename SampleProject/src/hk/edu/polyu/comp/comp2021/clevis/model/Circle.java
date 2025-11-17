@@ -22,7 +22,8 @@ public class Circle extends Shape {
 
     public boolean coverPoint(double px, double py){
         double dist = Math.sqrt(Math.pow(px - centerX, 2) + Math.pow(py - centerY, 2));
-        return Math.abs(dist - r) < 0.05;
+        double distance = 0.05;
+        return Math.abs(dist - r) < distance;
     }
 
     public boolean intersect(Shape other) {
