@@ -25,7 +25,16 @@ public class Rectangle extends Shape {
     }
     
     public boolean coverPoint(double px, double py) {
-        return (px >= x && px <= x + width && py >= y && py <= y + height);
+        double distLeft   = Math.abs(px - x);
+        double distRight  = Math.abs(px - (x + width));
+        double distTop    = Math.abs(py - y);
+        double distBottom = Math.abs(py - (y + height));
+
+        if (px >= x && px <= x + width && py >= y && py <= y + height) {
+            double minDist = Math.min(Math.min(distLeft, distRight), Math.min(distTop, distBottom));
+            return minDist < 0.05;
+        }
+        return false;
     }
 
     public boolean intersect(Shape other) {

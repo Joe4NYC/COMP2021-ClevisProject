@@ -33,20 +33,17 @@ public class Line extends Shape {
 
     public boolean coverPoint(double px, double py){
         double dx = x2 - x;
-        double dy = y2 -y;
+        double dy = y2 - y;
         double length = Math.sqrt(dx*dx + dy*dy);
 
-        double distance = Math.abs((px -x) * dy - (py - y) * dx) / length;
+        double distance = Math.abs((px - x) * dy - (py - y) * dx) / length;
+
         double dot = (px - x) * dx + (py - y) * dy;
-
-        if(dot < 0){
-            return false;
-        }
-        if(dot > dx * dx + dy * dy){
+        if (dot < 0 || dot > dx*dx + dy*dy) {
             return false;
         }
 
-        return true;
+        return distance < 0.05;
     }
 
     public boolean intersect(Shape other) {
