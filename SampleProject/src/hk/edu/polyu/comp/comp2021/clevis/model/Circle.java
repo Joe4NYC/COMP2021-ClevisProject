@@ -120,7 +120,11 @@ public class Circle extends Shape {
         return centerX;
     }
 
-    /** Sets the x-coordinate of the circle's center */
+    /**
+     * Sets the x-coordinate of the circle's center.
+     *
+     * @param centerX the new x-coordinate of the center
+     */
     public void setCenterX(double centerX) {
         this.centerX = centerX;
     }
@@ -130,7 +134,11 @@ public class Circle extends Shape {
         return r;
     }
 
-    /** Sets the radius of the circle */
+    /**
+     * Sets the radius of the circle.
+     *
+     * @param r the new radius
+     */
     public void setR(double r) {
         this.r = r;
     }
