@@ -8,6 +8,7 @@ import java.awt.geom.*;
 import java.util.*;
 import javax.swing.*;
 
+@SuppressWarnings("ALL")
 public class GraphicsPanel extends JPanel {
     private ShapeManager shapeManager;
     private double scale = 1.0;
@@ -19,6 +20,10 @@ public class GraphicsPanel extends JPanel {
     private static final double MIN_SCALE = 0.1; 
     private static final double MAX_SCALE = 10.0;
 
+    /**
+     * Initialization
+     * @param shapeManager importing shapeManager method
+     */
     public GraphicsPanel(ShapeManager shapeManager) {
         this.shapeManager = shapeManager;
         
@@ -28,6 +33,7 @@ public class GraphicsPanel extends JPanel {
         resetView();
     }
     
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
@@ -100,28 +106,42 @@ public class GraphicsPanel extends JPanel {
             drawShape(g2d, shape);
         }
     }
-    
+    /**
+     * Zoom in button design
+     */
     public void zoomIn() {
+        final double scaleNum = 1.2;
         if (scale < MAX_SCALE) {
-            scale *= 1.2;
+            scale *= scaleNum;
             repaint();
         }
     }
 
+    /**
+     * Zoom out button design
+     */
     public void zoomOut() {
-    if (scale > MIN_SCALE) {
-        scale /= 1.2;
-        repaint();
-        }
+        final double scaleNum = 1.2;
+        if (scale > MIN_SCALE) {
+            scale /= scaleNum;
+            repaint();
+            }
     }
 
+    /**
+     * Reset View button design
+     */
     public void resetView() {
+        final double half = 2.0;
         scale = 1.0;
-        offsetX = PANEL_WIDTH / 2.0;
-        offsetY = PANEL_HEIGHT / 2.0;
+        offsetX = PANEL_WIDTH / half;
+        offsetY = PANEL_HEIGHT / half;
         repaint();
     }
 
+    /**
+     * Redrawing
+     */
     public void refresh() {
         repaint();
     }

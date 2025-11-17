@@ -2,31 +2,46 @@ package hk.edu.polyu.comp.comp2021.clevis;
 
 import hk.edu.polyu.comp.comp2021.clevis.model.Logger;
 import hk.edu.polyu.comp.comp2021.clevis.model.ShapeManager;
+import hk.edu.polyu.comp.comp2021.clevis.view.ClevisGUI;
 import java.io.IOException;
 import java.util.Scanner;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
-
+/**handling log and quit */
 public class Application {
 
+    /**
+     * Main Program
+     * @param args user input log path
+     */
     public static void main(String[] args) {
         String htmlPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.html";
         String txtPath = "SampleProject/src/hk/edu/polyu/comp/comp2021/clevis/log/log.txt";
+        boolean guiMode = false;
 
         for (int i = 0; i < args.length; i++) {
             if ("-html".equalsIgnoreCase(args[i]) && i + 1 < args.length) {
                 htmlPath = args[++i];
             } else if ("-txt".equalsIgnoreCase(args[i]) && i + 1 < args.length) {
                 txtPath = args[++i];
+            } else if ("-gui".equalsIgnoreCase(args[i])) {
+                guiMode = true;
             }
         }
-
-        if (htmlPath == null || txtPath == null) {
-            System.err.println("""
-                Error: Missing log file parameters.
-                Usage: java hk.edu.polyu.comp.comp2021.clevis.Application -html <htmlfile> -txt <txtfile>
-                Example: java hk.edu.polyu.comp.comp2021.clevis.Application -html log.html -txt log.txt
-                """);
-            System.exit(1);
+        
+        if (guiMode) {
+            final String finalHtmlPath = htmlPath;
+            final String finalTxtPath = txtPath;
+            
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception ignored) {
+                }
+                new ClevisGUI(finalHtmlPath, finalTxtPath);
+            });
+            return;
         }
 
         Logger logger = null;

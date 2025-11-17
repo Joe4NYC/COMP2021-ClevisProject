@@ -1,11 +1,18 @@
 package hk.edu.polyu.comp.comp2021.clevis;
 
-import hk.edu.polyu.comp.comp2021.clevis.model.Shape;
 import hk.edu.polyu.comp.comp2021.clevis.model.ShapeManager;
 
-
+/**
+ * Handing user commands' input
+ */
 public class CommandProcessor {
 
+    /**
+     * Using switch-case to identify what method being calling
+     * @param rawCommand user commands input
+     * @param manager importing shapeManager method
+     * @return exit
+     */
     public static boolean execute(String rawCommand, ShapeManager manager) {
         if (rawCommand == null || rawCommand.trim().isEmpty()) return false;
 
@@ -65,13 +72,13 @@ public class CommandProcessor {
                 }
                 case "shapeat" -> {
                     checkArgs(tokens, 3);
-                    Shape found = manager.shapeAt(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]));
-                    System.out.println(found == null ? "" : found.getName());
+                    String found = manager.shapeAt(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]));
+                    System.out.println(found == null ? "" : found);
                     return false;
                 }
                 case "list" -> {
                     checkArgs(tokens, 2);
-                    System.out.println(manager.listAll());
+                    System.out.println(manager.list(tokens[1]));
                     return false;
                 }
                 case "listall" -> {

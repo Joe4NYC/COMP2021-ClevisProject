@@ -3,21 +3,47 @@ package hk.edu.polyu.comp.comp2021.clevis.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Represents a group of shapes. A group delegates operations
+ * such as move, coverPoint, and intersect to its member shapes.
+ */
 public class Group extends Shape {
-    
+
+    /** List of all shapes in the group */
     private List<Shape> allShapes = new ArrayList<>();
-    
+
+    /**
+     * Constructs a Group object.
+     *
+     * @param name   the name of the group
+     * @param zOrder rendering order
+     * @param shapes initial member shapes
+     */
     public Group(String name, int zOrder, List<Shape> shapes) {
         super(name, zOrder);
         allShapes.addAll(shapes);
     }
 
+    /**
+     * Moves all shapes in the group by the given delta values.
+     *
+     * @param dx amount to move along the x-axis
+     * @param dy amount to move along the y-axis
+     */
+    @Override
     public void move(double dx, double dy){
         for(Shape s : allShapes){
             s.move(dx, dy);
         }
     }
 
+    /**
+     * Returns the bounding box of the group, covering all member shapes.
+     *
+     * @return an array [minX, minY, maxX, maxY]
+     */
+    @Override
     public double[] getBoundingBox(){
         double minX = Double.MAX_VALUE;
         double minY = Double.MAX_VALUE;
@@ -33,7 +59,15 @@ public class Group extends Shape {
         }
         return new double[]{minX, minY, maxX - minX, maxY - minY};
     }
-    
+
+    /**
+     * Checks whether any shape in the group covers the given point.
+     *
+     * @param x x-coordinate of the point
+     * @param y y-coordinate of the point
+     * @return true if at least one shape covers the point
+     */
+    @Override
     public boolean coverPoint(double x, double y){
         for(Shape s : allShapes){
             if(s.coverPoint(x, y)){
@@ -43,6 +77,13 @@ public class Group extends Shape {
         return false;
     }
 
+    /**
+     * Checks whether any shape in the group intersects with another shape.
+     *
+     * @param other the other shape
+     * @return true if at least one member intersects with the other
+     */
+    @Override
     public boolean intersect(Shape other) {
         for (Shape s : allShapes) {
             if (s.intersect(other)) {
@@ -52,6 +93,12 @@ public class Group extends Shape {
         return false;
     }
 
+    /**
+     * Returns a textual description of the group and its members.
+     *
+     * @return formatted description string
+     */
+    @Override
     public String describe(){
         StringBuilder sb = new StringBuilder("Group " + getName() + ": ");
         for (Shape s : allShapes) {
@@ -60,12 +107,23 @@ public class Group extends Shape {
         return sb.toString();
     }
 
+    /** Placeholder for restoring group members (e.g., undo/redo). */
     public void restoreMembers(){}
 
+    /**
+     * Returns a copy of the group’s member list.
+     *
+     * @return new list of member shapes
+     */
     public List<Shape> getMembers() {
         return new ArrayList<>(allShapes);
     }
 
+    /**
+     * Returns the minimum x-coordinate among all member shapes.
+     *
+     * @return min x-coordinate
+     */
     @Override
     public double getX() {
         if(allShapes.isEmpty()){
@@ -78,6 +136,11 @@ public class Group extends Shape {
         return minX;
     }
 
+    /**
+     * Returns the minimum y-coordinate among all member shapes.
+     *
+     * @return min y-coordinate
+     */
     @Override
     public double getY() {
         double minY = Double.MAX_VALUE;
@@ -87,6 +150,11 @@ public class Group extends Shape {
         return minY;
     }
 
+    /**
+     * Returns the internal list of shapes (modifiable).
+     *
+     * @return reference to the member list
+     */
     public List<Shape> getShapes() {
         return allShapes;
     }
