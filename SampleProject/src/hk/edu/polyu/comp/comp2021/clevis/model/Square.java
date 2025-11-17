@@ -21,7 +21,6 @@ public class Square extends Rectangle {
      * Returns a string description of the square.
      */
     @Override
-    @Override
     public String describe() {
         return String.format("Square %s: topLeft=(%.2f,%.2f), side=%.2f", name, getBoundingBox()[0], getBoundingBox()[1], getBoundingBox()[2]);
     }

@@ -14,12 +14,10 @@ public class MoveCommand implements Command {
     }
 
     @Override
-    @Override
     public void redo() {
         shape.move(changeX, changeY);
     }
 
-    @Override
     @Override
     public void undo() {
         shape.move(-changeX, -changeY);
