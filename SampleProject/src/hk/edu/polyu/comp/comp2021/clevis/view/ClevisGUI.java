@@ -7,13 +7,9 @@ import java.awt.event.*;
 import java.io.IOException;
 import javax.swing.*;
 
-<<<<<<< HEAD
-@SuppressWarnings("MagicNumber")
-=======
 /**
  * BON1 GUI Implementing
  */
->>>>>>> 4f93275c71a758dce38bf4ebc2a95ff6d0494926
 public class ClevisGUI extends JFrame {
 
     private ShapeManager shapeManager;
@@ -27,17 +23,12 @@ public class ClevisGUI extends JFrame {
     private JButton zoomInButton;
     private JButton zoomOutButton;
     private JButton resetViewButton;
-<<<<<<< HEAD
-    
-    @SuppressWarnings("MagicNumber")
-=======
 
     /**
      * Deciding Log path and calling all the methods
      * @param htmlPath html path
      * @param txtPath txt path
      */
->>>>>>> 4f93275c71a758dce38bf4ebc2a95ff6d0494926
     public ClevisGUI(String htmlPath, String txtPath) {
         super("Clevis – Graphical Vector Graphics Software");
         this.shapeManager = new ShapeManager();
@@ -60,8 +51,8 @@ public class ClevisGUI extends JFrame {
         setupListeners();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        int width = 1200;
-        int height = 800;
+        final int width = 1200;
+        final int height = 800;
         setSize(width, height);
         setVisible(true);
 
