@@ -4,15 +4,27 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for ShapeManager.
+ * Each test verifies a specific feature of the CLEVIS system:
+ * creation, movement, grouping, deletion, bounding boxes,
+ * intersection, shape lookup, name conflicts, and z-order.
+ */
 public class ShapeManagerTest {
 
     private ShapeManager manager;
 
+    /**
+     * Initializes a fresh ShapeManager before each test.
+     */
     @BeforeEach
     public void setUp() {
         manager = new ShapeManager();  
     }
 
+    /**
+     * Tests creation of shapes and verifies they appear in the list.
+     */
     @Test
     public void testCreateAndListShapes() {
         manager.createRectangle("r1", 0, 0, 10, 10);
@@ -27,6 +39,9 @@ public class ShapeManagerTest {
         assertTrue(listAll.contains("s1"));
     }
 
+    /**
+     * Tests moving a shape and verifies undo/redo restores positions correctly.
+     */
     @Test
     public void testMoveAndUndoRedo() {
         manager.createRectangle("r1", 0, 0, 10, 10);
@@ -36,12 +51,17 @@ public class ShapeManagerTest {
 
         manager.undo();
         assertTrue(manager.listAll().contains("0.00"));
+
         manager.redo();
         assertTrue(manager.listAll().contains("20.00"));
     }
 
+    /**
+     * Tests grouping and ungrouping of shapes.
+     */
     @Test
     public void testGroupAndUngroup() {
+        // Group two shapes together
         manager.createRectangle("r1", 0, 0, 10, 10);
         manager.createCircle("c1", 15, 15, 5);
         manager.group("group g1 r1 c1");
@@ -58,6 +78,9 @@ public class ShapeManagerTest {
         assertFalse(manager.listAll().contains("g1"));
     }
 
+    /**
+     * Tests deletion of a shape and undo restoration.
+     */
     @Test
     public void testDeleteAndUndo() {
         manager.createLine("l1", 0, 0, 10, 10);
@@ -68,8 +91,12 @@ public class ShapeManagerTest {
         assertTrue(manager.listAll().contains("l1"));
     }
 
+    /**
+     * Tests bounding box calculation and intersection detection.
+     */
     @Test
     public void testBoundingBoxAndIntersect() {
+        // Bounding box of rectangle should match expected coordinates
         manager.createRectangle("r1", 0, 0, 10, 10);
         manager.createCircle("c1", 5, 5, 3);
 
@@ -80,8 +107,12 @@ public class ShapeManagerTest {
         assertTrue(manager.intersect("r1", "c1"));
     }
 
+    /**
+     * Tests shape lookup at specific coordinates.
+     */
     @Test
     public void testShapeAt() {
+        // Check which shape is at given coordinates
         manager.createRectangle("r1", 0, 0, 20, 20);
         manager.createCircle("c1", 10, 10, 5);
 
@@ -90,6 +121,9 @@ public class ShapeManagerTest {
         assertEquals(null, manager.shapeAt(100, 100));
     }
 
+    /**
+     * Tests that creating shapes with duplicate names throws an exception.
+     */
     @Test
     public void testNameConflict() {
         manager.createRectangle("r1", 0, 0, 10, 10);
@@ -98,8 +132,12 @@ public class ShapeManagerTest {
         });
     }
 
+    /**
+     * Tests z-order rendering (last created shape should be on top).
+     */
     @Test
     public void testZOrder() {
+        // Circle created after rectangle should appear on top
         manager.createRectangle("r1", 0, 0, 10, 10);
         manager.createCircle("c1", 0, 0, 5);
         assertEquals("c1", manager.shapeAt(5, 0));
