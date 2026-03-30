@@ -57,7 +57,7 @@ CLEVIS includes a Swing-based GUI built with two main classes:
 ---
 
 ## 📂 Project Structure
-(structure.png)
+![alt text](structure.png)
 ---
 
 ## 🚀 Getting Started
